@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+    <style>
+
+      h2 {
+        text-align: center;
+        color: black;
+      }
+
+      h2 {
+        text-align: center;
+        color: blue;
+        font-style: italic;
+      }
+
+      .axis {
+        font-family: arial;
+        font-size: 0.6em;
+      }
+      path {
+        fill: none;
+        stroke: black;
+        stroke-width: 2px;        }
+      .tick {
+        fill: none;
+        stroke: black;
+      }
+      circle {
+        opacity: 0.4;
+        stroke: none;
+      }
+      .line_plot {
+        fill: none;
+        stroke: #4eb0bb;
+        stroke-width: 1px;
+      }
+
+    </style>
+    <script type="text/javascript">  
+    /* insert js here! */
+
+    function draw_chart(data) {
+      /* main charting function using d3.js */
+      "use strict";
+
+      var margin = 200,
+              width = 1000 - margin,
+              height = 600 - margin;
+
+      var svg = d3.select("body")
+          .append("svg")
+          .attr("width", width + margin)
+          .attr("height", height + margin)
+          .append('g')
+          .attr('class', 'chart');
+      
+
+      var year_extent = d3.extent(data, function(d) {
+        return d['YEAR'];
+      })
+
+      var x_scale = d3.scale.linear()
+          .domain(year_extent)
+          .range([margin, width])
+
+      var x_axis = d3.svg.axis()
+          .scale(x_scale);
+
+      d3.select("svg")
+          .append('g')
+          .attr('class', 'x axis')
+          .call(x_axis);
+
+      debugger;
+
+    } /* draw_chart END */
+
+    </script>
+  </head>
+<body>
+  <script type="text/javascript">
+  /*  Load data and  */
+    
+  d3.csv("data/Emmigration.csv", function(d) {
+    return d;
+  }, draw_chart);
+  </script>
+<h1>Economic Recession and its Impact on Immigration and Emigration in Ireland (2006 - 2016)</h1>
+<h2>Data Visualisation Project - Donal O Farrell</h2>
+
+</body>
+</html>

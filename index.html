@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+ <script src="https://d3js.org/d3.v4.0.0-alpha.44.min.js"></script>
     <style>
 
       h2 {
@@ -46,14 +45,14 @@
       /* main charting function using d3.js */
       "use strict";
 
-      var margin = 200,
-              width = 1000 - margin,
-              height = 600 - margin;
-
-      var svg = d3.select("body")
+      var margin = {top: 20, right: 100, bottom: 200, left: 100},
+          width = 1000 - margin.left - margin.right,
+          height = 600 - margin.top - margin.bottom;
+      
+	  var svg = d3.select("body")
           .append("svg")
-          .attr("width", width + margin)
-          .attr("height", height + margin)
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
           .append('g')
           .attr('class', 'chart');
       
@@ -62,22 +61,42 @@
         return d['YEAR'];
       })
 
-      var x_scale = d3.scale.linear()
+      var x_scale = d3.scaleLinear()
           .domain(year_extent)
-          .range([margin, width])
+          .range([0, width]);
 
-      var x_axis = d3.svg.axis()
-          .scale(x_scale);
+      var x_axis = d3.axisBottom(x_scale);
 
       d3.select("svg")
           .append('g')
           .attr('class', 'x axis')
-          .call(x_axis);
+		  .attr("transform", "translate(" + margin.left +", " + height + ")")
+          .call(x_axis)
+		  .style("text-anchor", "middle")
+		  .attr("font-family","arial");
+
+      var y_extent = d3.extent(data, function(d) {
+        return d['Irish'];
+      })
+
+      var y_scale = d3.scaleLinear()
+          .domain(y_extent)
+          .range([height, 0]);
+	  
+
+      var y_axis = d3.axisLeft(y_scale)
+	      .ticks(10);
+
+      d3.select("svg")
+          .append('g')
+          .attr('class', 'y axis')
+          .attr("transform", "translate(" + margin.left + ",0)")
+		  .call(y_axis);
+	  		  
 
       debugger;
 
     } /* draw_chart END */
-
     </script>
   </head>
 <body>

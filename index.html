@@ -19,9 +19,9 @@
         font-family: arial;
         font-size: 0.6em;
       }
-      path {
+      .path {
         fill: none;
-        stroke: black;
+        stroke: green;
         stroke-width: 2px;        }
       .tick {
         fill: none;
@@ -37,6 +37,12 @@
         stroke-width: 1px;
       }
 
+      .line {
+        fill: none;
+        stroke: green;
+        stroke-width: 2px;
+      }
+
     </style>
     <script type="text/javascript">  
     /* insert js here! */
@@ -45,11 +51,11 @@
       /* main charting function using d3.js */
       "use strict";
 
-      var margin = {top: 20, right: 100, bottom: 200, left: 100},
+      var margin = {top: 50, right: 100, bottom: 50, left: 100},
           width = 1000 - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom;
+          height = 500 - margin.top - margin.bottom;
       
-	  var svg = d3.select("body")
+	    var svg = d3.select("body")
           .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
@@ -67,13 +73,14 @@
 
       var x_axis = d3.axisBottom(x_scale);
 
+      // Add x axis
       d3.select("svg")
           .append('g')
           .attr('class', 'x axis')
-		  .attr("transform", "translate(" + margin.left +", " + height + ")")
+		      .attr("transform", "translate(" + margin.left +", "+ (height + margin.top) +")")
           .call(x_axis)
-		  .style("text-anchor", "middle")
-		  .attr("font-family","arial");
+		      .style("text-anchor", "middle")
+		      .attr("font-family","arial");
 
       var y_extent = d3.extent(data, function(d) {
         return d['Irish'];
@@ -87,12 +94,30 @@
       var y_axis = d3.axisLeft(y_scale)
 	      .ticks(10);
 
+      // Add y axis
       d3.select("svg")
           .append('g')
           .attr('class', 'y axis')
-          .attr("transform", "translate(" + margin.left + ",0)")
-		  .call(y_axis);
-	  		  
+          .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+		      .call(y_axis);
+	  	
+      var valueline = d3.line()
+          .x(function(d) { return x_scale(d.YEAR); })
+          .y(function(d) { return y_scale(d.Irish); });
+
+      // Add line
+      d3.select("svg").append("path")
+        .attr("class", "line")
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+        .attr("d", valueline(data));
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 6)
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+        .attr("cx", function(d) { return x_scale(d.YEAR); })
+        .attr("cy", function(d) { return y_scale(d.Irish); });
 
       debugger;
 

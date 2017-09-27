@@ -1,0 +1,613 @@
+"","Year","Header","Nationality","Sex","Result","Age.Group"
+"1",2006,"Emmigration","All","Both",36,NA
+"2",2007,"Emmigration","All","Both",46.3,NA
+"3",2008,"Emmigration","All","Both",49.2,NA
+"4",2009,"Emmigration","All","Both",72,NA
+"5",2010,"Emmigration","All","Both",69.2,NA
+"6",2011,"Emmigration","All","Both",80.6,NA
+"7",2012,"Emmigration","All","Both",87.1,NA
+"8",2013,"Emmigration","All","Both",89,NA
+"9",2014,"Emmigration","All","Both",81.9,NA
+"10",2015,"Emmigration","All","Both",80.9,NA
+"11",2016,"Emmigration","All","Both",76.2,NA
+"12",2006,"Emmigration","All","Male",18.7,NA
+"13",2007,"Emmigration","All","Male",25.7,NA
+"14",2008,"Emmigration","All","Male",29.6,NA
+"15",2009,"Emmigration","All","Male",41.9,NA
+"16",2010,"Emmigration","All","Male",40.6,NA
+"17",2011,"Emmigration","All","Male",41.9,NA
+"18",2012,"Emmigration","All","Male",48.9,NA
+"19",2013,"Emmigration","All","Male",44.9,NA
+"20",2014,"Emmigration","All","Male",42,NA
+"21",2015,"Emmigration","All","Male",42.2,NA
+"22",2016,"Emmigration","All","Male",35.9,NA
+"23",2006,"Emmigration","All","Female",17.3,NA
+"24",2007,"Emmigration","All","Female",20.6,NA
+"25",2008,"Emmigration","All","Female",19.6,NA
+"26",2009,"Emmigration","All","Female",30.1,NA
+"27",2010,"Emmigration","All","Female",28.7,NA
+"28",2011,"Emmigration","All","Female",38.8,NA
+"29",2012,"Emmigration","All","Female",38.2,NA
+"30",2013,"Emmigration","All","Female",44,NA
+"31",2014,"Emmigration","All","Female",39.9,NA
+"32",2015,"Emmigration","All","Female",38.7,NA
+"33",2016,"Emmigration","All","Female",40.3,NA
+"34",2006,"Emmigration","Irish","Both",15.3,NA
+"35",2007,"Emmigration","Irish","Both",12.9,NA
+"36",2008,"Emmigration","Irish","Both",13.1,NA
+"37",2009,"Emmigration","Irish","Both",19.2,NA
+"38",2010,"Emmigration","Irish","Both",28.9,NA
+"39",2011,"Emmigration","Irish","Both",42,NA
+"40",2012,"Emmigration","Irish","Both",46.5,NA
+"41",2013,"Emmigration","Irish","Both",50.9,NA
+"42",2014,"Emmigration","Irish","Both",40.7,NA
+"43",2015,"Emmigration","Irish","Both",35.3,NA
+"44",2016,"Emmigration","Irish","Both",31.8,NA
+"45",2006,"Emmigration","Irish","Male",8,NA
+"46",2007,"Emmigration","Irish","Male",6.1,NA
+"47",2008,"Emmigration","Irish","Male",7.1,NA
+"48",2009,"Emmigration","Irish","Male",12.3,NA
+"49",2010,"Emmigration","Irish","Male",16.7,NA
+"50",2011,"Emmigration","Irish","Male",24.5,NA
+"51",2012,"Emmigration","Irish","Male",26,NA
+"52",2013,"Emmigration","Irish","Male",27.1,NA
+"53",2014,"Emmigration","Irish","Male",22.7,NA
+"54",2015,"Emmigration","Irish","Male",18.8,NA
+"55",2016,"Emmigration","Irish","Male",15.9,NA
+"56",2006,"Emmigration","Irish","Female",7.3,NA
+"57",2007,"Emmigration","Irish","Female",6.8,NA
+"58",2008,"Emmigration","Irish","Female",6,NA
+"59",2009,"Emmigration","Irish","Female",6.9,NA
+"60",2010,"Emmigration","Irish","Female",12.2,NA
+"61",2011,"Emmigration","Irish","Female",17.5,NA
+"62",2012,"Emmigration","Irish","Female",20.6,NA
+"63",2013,"Emmigration","Irish","Female",23.8,NA
+"64",2014,"Emmigration","Irish","Female",18,NA
+"65",2015,"Emmigration","Irish","Female",16.5,NA
+"66",2016,"Emmigration","Irish","Female",15.9,NA
+"67",2006,"Emmigration","UK","Both",2.2,NA
+"68",2007,"Emmigration","UK","Both",3.7,NA
+"69",2008,"Emmigration","UK","Both",3.7,NA
+"70",2009,"Emmigration","UK","Both",3.9,NA
+"71",2010,"Emmigration","UK","Both",3,NA
+"72",2011,"Emmigration","UK","Both",4.6,NA
+"73",2012,"Emmigration","UK","Both",3.5,NA
+"74",2013,"Emmigration","UK","Both",3.9,NA
+"75",2014,"Emmigration","UK","Both",2.7,NA
+"76",2015,"Emmigration","UK","Both",3.8,NA
+"77",2016,"Emmigration","UK","Both",2.6,NA
+"78",2006,"Emmigration","UK","Male",1.6,NA
+"79",2007,"Emmigration","UK","Male",2.3,NA
+"80",2008,"Emmigration","UK","Male",2.5,NA
+"81",2009,"Emmigration","UK","Male",2.4,NA
+"82",2010,"Emmigration","UK","Male",1.7,NA
+"83",2011,"Emmigration","UK","Male",1.8,NA
+"84",2012,"Emmigration","UK","Male",2,NA
+"85",2013,"Emmigration","UK","Male",2,NA
+"86",2014,"Emmigration","UK","Male",1.6,NA
+"87",2015,"Emmigration","UK","Male",2.5,NA
+"88",2016,"Emmigration","UK","Male",1.3,NA
+"89",2006,"Emmigration","UK","Female",0.6,NA
+"90",2007,"Emmigration","UK","Female",1.4,NA
+"91",2008,"Emmigration","UK","Female",1.3,NA
+"92",2009,"Emmigration","UK","Female",1.5,NA
+"93",2010,"Emmigration","UK","Female",1.4,NA
+"94",2011,"Emmigration","UK","Female",2.8,NA
+"95",2012,"Emmigration","UK","Female",1.5,NA
+"96",2013,"Emmigration","UK","Female",1.9,NA
+"97",2014,"Emmigration","UK","Female",1.1,NA
+"98",2015,"Emmigration","UK","Female",1.3,NA
+"99",2016,"Emmigration","UK","Female",1.3,NA
+"100",2006,"Emmigration","EU15","Both",5.1,NA
+"101",2007,"Emmigration","EU15","Both",8.9,NA
+"102",2008,"Emmigration","EU15","Both",6,NA
+"103",2009,"Emmigration","EU15","Both",7.4,NA
+"104",2010,"Emmigration","EU15","Both",9,NA
+"105",2011,"Emmigration","EU15","Both",10.2,NA
+"106",2012,"Emmigration","EU15","Both",11.2,NA
+"107",2013,"Emmigration","EU15","Both",9.9,NA
+"108",2014,"Emmigration","EU15","Both",14,NA
+"109",2015,"Emmigration","EU15","Both",15.6,NA
+"110",2016,"Emmigration","EU15","Both",10.3,NA
+"111",2006,"Emmigration","EU15","Male",2.5,NA
+"112",2007,"Emmigration","EU15","Male",4.3,NA
+"113",2008,"Emmigration","EU15","Male",2,NA
+"114",2009,"Emmigration","EU15","Male",1.9,NA
+"115",2010,"Emmigration","EU15","Male",4,NA
+"116",2011,"Emmigration","EU15","Male",3.7,NA
+"117",2012,"Emmigration","EU15","Male",5,NA
+"118",2013,"Emmigration","EU15","Male",2.6,NA
+"119",2014,"Emmigration","EU15","Male",5.7,NA
+"120",2015,"Emmigration","EU15","Male",5.3,NA
+"121",2016,"Emmigration","EU15","Male",4.5,NA
+"122",2006,"Emmigration","EU15","Female",2.6,NA
+"123",2007,"Emmigration","EU15","Female",4.6,NA
+"124",2008,"Emmigration","EU15","Female",4,NA
+"125",2009,"Emmigration","EU15","Female",5.5,NA
+"126",2010,"Emmigration","EU15","Female",5,NA
+"127",2011,"Emmigration","EU15","Female",6.6,NA
+"128",2012,"Emmigration","EU15","Female",6.2,NA
+"129",2013,"Emmigration","EU15","Female",7.2,NA
+"130",2014,"Emmigration","EU15","Female",8.3,NA
+"131",2015,"Emmigration","EU15","Female",10.4,NA
+"132",2016,"Emmigration","EU15","Female",5.8,NA
+"133",2006,"Emmigration","EU28","Both",7.2,NA
+"134",2007,"Emmigration","EU28","Both",12.6,NA
+"135",2008,"Emmigration","EU28","Both",17.2,NA
+"136",2009,"Emmigration","EU28","Both",30.5,NA
+"137",2010,"Emmigration","EU28","Both",19,NA
+"138",2011,"Emmigration","EU28","Both",13.9,NA
+"139",2012,"Emmigration","EU28","Both",14.8,NA
+"140",2013,"Emmigration","EU28","Both",14,NA
+"141",2014,"Emmigration","EU28","Both",10.1,NA
+"142",2015,"Emmigration","EU28","Both",8.5,NA
+"143",2016,"Emmigration","EU28","Both",12.9,NA
+"144",2006,"Emmigration","EU28","Male",3.7,NA
+"145",2007,"Emmigration","EU28","Male",8.4,NA
+"146",2008,"Emmigration","EU28","Male",12.4,NA
+"147",2009,"Emmigration","EU28","Male",21.1,NA
+"148",2010,"Emmigration","EU28","Male",12.8,NA
+"149",2011,"Emmigration","EU28","Male",6.8,NA
+"150",2012,"Emmigration","EU28","Male",8.4,NA
+"151",2013,"Emmigration","EU28","Male",7,NA
+"152",2014,"Emmigration","EU28","Male",6.1,NA
+"153",2015,"Emmigration","EU28","Male",6.4,NA
+"154",2016,"Emmigration","EU28","Male",7.2,NA
+"155",2006,"Emmigration","EU28","Female",3.4,NA
+"156",2007,"Emmigration","EU28","Female",4.3,NA
+"157",2008,"Emmigration","EU28","Female",4.8,NA
+"158",2009,"Emmigration","EU28","Female",9.5,NA
+"159",2010,"Emmigration","EU28","Female",6.2,NA
+"160",2011,"Emmigration","EU28","Female",7.1,NA
+"161",2012,"Emmigration","EU28","Female",6.4,NA
+"162",2013,"Emmigration","EU28","Female",7,NA
+"163",2014,"Emmigration","EU28","Female",4,NA
+"164",2015,"Emmigration","EU28","Female",2.2,NA
+"165",2016,"Emmigration","EU28","Female",5.7,NA
+"166",2006,"Emmigration","Other","Both",6.2,NA
+"167",2007,"Emmigration","Other","Both",8.2,NA
+"168",2008,"Emmigration","Other","Both",9,NA
+"169",2009,"Emmigration","Other","Both",11,NA
+"170",2010,"Emmigration","Other","Both",9.3,NA
+"171",2011,"Emmigration","Other","Both",9.9,NA
+"172",2012,"Emmigration","Other","Both",11.1,NA
+"173",2013,"Emmigration","Other","Both",10.3,NA
+"174",2014,"Emmigration","Other","Both",14.4,NA
+"175",2015,"Emmigration","Other","Both",17.7,NA
+"176",2016,"Emmigration","Other","Both",18.5,NA
+"177",2006,"Emmigration","Other","Male",2.8,NA
+"178",2007,"Emmigration","Other","Male",4.6,NA
+"179",2008,"Emmigration","Other","Male",5.5,NA
+"180",2009,"Emmigration","Other","Male",4.3,NA
+"181",2010,"Emmigration","Other","Male",5.4,NA
+"182",2011,"Emmigration","Other","Male",5.1,NA
+"183",2012,"Emmigration","Other","Male",7.5,NA
+"184",2013,"Emmigration","Other","Male",6.2,NA
+"185",2014,"Emmigration","Other","Male",5.9,NA
+"186",2015,"Emmigration","Other","Male",9.3,NA
+"187",2016,"Emmigration","Other","Male",6.9,NA
+"188",2006,"Emmigration","Other","Female",3.4,NA
+"189",2007,"Emmigration","Other","Female",3.6,NA
+"190",2008,"Emmigration","Other","Female",3.5,NA
+"191",2009,"Emmigration","Other","Female",6.7,NA
+"192",2010,"Emmigration","Other","Female",3.9,NA
+"193",2011,"Emmigration","Other","Female",4.8,NA
+"194",2012,"Emmigration","Other","Female",3.6,NA
+"195",2013,"Emmigration","Other","Female",4.1,NA
+"196",2014,"Emmigration","Other","Female",8.5,NA
+"197",2015,"Emmigration","Other","Female",8.4,NA
+"198",2016,"Emmigration","Other","Female",11.6,NA
+"199",2006,"Immigration","All","Both",107.8,NA
+"200",2007,"Immigration","All","Both",151.1,NA
+"201",2008,"Immigration","All","Both",113.5,NA
+"202",2009,"Immigration","All","Both",73.7,NA
+"203",2010,"Immigration","All","Both",41.8,NA
+"204",2011,"Immigration","All","Both",53.3,NA
+"205",2012,"Immigration","All","Both",52.7,NA
+"206",2013,"Immigration","All","Both",55.9,NA
+"207",2014,"Immigration","All","Both",60.6,NA
+"208",2015,"Immigration","All","Both",69.3,NA
+"209",2016,"Immigration","All","Both",79.3,NA
+"210",2006,"Immigration","Irish","Both",18.9,NA
+"211",2007,"Immigration","Irish","Both",30.7,NA
+"212",2008,"Immigration","Irish","Both",23.8,NA
+"213",2009,"Immigration","Irish","Both",23,NA
+"214",2010,"Immigration","Irish","Both",17.9,NA
+"215",2011,"Immigration","Irish","Both",19.6,NA
+"216",2012,"Immigration","Irish","Both",20.6,NA
+"217",2013,"Immigration","Irish","Both",15.7,NA
+"218",2014,"Immigration","Irish","Both",11.6,NA
+"219",2015,"Immigration","Irish","Both",12.1,NA
+"220",2016,"Immigration","Irish","Both",21.1,NA
+"221",2006,"Immigration","UK","Both",9.9,NA
+"222",2007,"Immigration","UK","Both",4.3,NA
+"223",2008,"Immigration","UK","Both",6.8,NA
+"224",2009,"Immigration","UK","Both",3.9,NA
+"225",2010,"Immigration","UK","Both",2.5,NA
+"226",2011,"Immigration","UK","Both",4.1,NA
+"227",2012,"Immigration","UK","Both",2.2,NA
+"228",2013,"Immigration","UK","Both",4.9,NA
+"229",2014,"Immigration","UK","Both",4.9,NA
+"230",2015,"Immigration","UK","Both",5,NA
+"231",2016,"Immigration","UK","Both",4.5,NA
+"232",2006,"Immigration","EU15","Both",12.7,NA
+"233",2007,"Immigration","EU15","Both",11.8,NA
+"234",2008,"Immigration","EU15","Both",9.6,NA
+"235",2009,"Immigration","EU15","Both",11.5,NA
+"236",2010,"Immigration","EU15","Both",6.2,NA
+"237",2011,"Immigration","EU15","Both",7.1,NA
+"238",2012,"Immigration","EU15","Both",7.2,NA
+"239",2013,"Immigration","EU15","Both",7.4,NA
+"240",2014,"Immigration","EU15","Both",8.7,NA
+"241",2015,"Immigration","EU15","Both",8.9,NA
+"242",2016,"Immigration","EU15","Both",10,NA
+"243",2006,"Immigration","EU28","Both",10,NA
+"244",2007,"Immigration","EU28","Both",12,NA
+"245",2008,"Immigration","EU28","Both",11,NA
+"246",2009,"Immigration","EU28","Both",8,NA
+"247",2010,"Immigration","EU28","Both",13,NA
+"248",2011,"Immigration","EU28","Both",3,NA
+"249",2012,"Immigration","EU28","Both",4,NA
+"250",2013,"Immigration","EU28","Both",5,NA
+"251",2014,"Immigration","EU28","Both",2,NA
+"252",2015,"Immigration","EU28","Both",7,NA
+"253",2016,"Immigration","EU28","Both",6,NA
+"254",2006,"Immigration","Other","Both",16.4,NA
+"255",2007,"Immigration","Other","Both",19,NA
+"256",2008,"Immigration","Other","Both",18.6,NA
+"257",2009,"Immigration","Other","Both",14.1,NA
+"258",2010,"Immigration","Other","Both",6,NA
+"259",2011,"Immigration","Other","Both",12.4,NA
+"260",2012,"Immigration","Other","Both",12.4,NA
+"261",2013,"Immigration","Other","Both",17.1,NA
+"262",2014,"Immigration","Other","Both",25.5,NA
+"263",2015,"Immigration","Other","Both",30.4,NA
+"264",2016,"Immigration","Other","Both",31.8,NA
+"265",2006,"Immigration","All","Male",60.3,NA
+"266",2007,"Immigration","All","Male",80,NA
+"267",2008,"Immigration","All","Male",53.9,NA
+"268",2009,"Immigration","All","Male",36.8,NA
+"269",2010,"Immigration","All","Male",20.4,NA
+"270",2011,"Immigration","All","Male",26,NA
+"271",2012,"Immigration","All","Male",25,NA
+"272",2013,"Immigration","All","Male",28.2,NA
+"273",2014,"Immigration","All","Male",28.2,NA
+"274",2015,"Immigration","All","Male",32.7,NA
+"275",2016,"Immigration","All","Male",38.7,NA
+"276",2006,"Immigration","Irish","Male",9.5,NA
+"277",2007,"Immigration","Irish","Male",15.7,NA
+"278",2008,"Immigration","Irish","Male",11.8,NA
+"279",2009,"Immigration","Irish","Male",13,NA
+"280",2010,"Immigration","Irish","Male",9,NA
+"281",2011,"Immigration","Irish","Male",9.9,NA
+"282",2012,"Immigration","Irish","Male",11.7,NA
+"283",2013,"Immigration","Irish","Male",9.3,NA
+"284",2014,"Immigration","Irish","Male",5.5,NA
+"285",2015,"Immigration","Irish","Male",6.3,NA
+"286",2016,"Immigration","Irish","Male",10.9,NA
+"287",2006,"Immigration","UK","Male",5.7,NA
+"288",2007,"Immigration","UK","Male",2.4,NA
+"289",2008,"Immigration","UK","Male",4.1,NA
+"290",2009,"Immigration","UK","Male",2.3,NA
+"291",2010,"Immigration","UK","Male",1.4,NA
+"292",2011,"Immigration","UK","Male",2.2,NA
+"293",2012,"Immigration","UK","Male",1.1,NA
+"294",2013,"Immigration","UK","Male",2.4,NA
+"295",2014,"Immigration","UK","Male",2,NA
+"296",2015,"Immigration","UK","Male",2.2,NA
+"297",2016,"Immigration","UK","Male",1.9,NA
+"298",2006,"Immigration","EU15","Male",6.4,NA
+"299",2007,"Immigration","EU15","Male",4.7,NA
+"300",2008,"Immigration","EU15","Male",3.9,NA
+"301",2009,"Immigration","EU15","Male",3.7,NA
+"302",2010,"Immigration","EU15","Male",2.6,NA
+"303",2011,"Immigration","EU15","Male",3.4,NA
+"304",2012,"Immigration","EU15","Male",2.4,NA
+"305",2013,"Immigration","EU15","Male",2.7,NA
+"306",2014,"Immigration","EU15","Male",4.3,NA
+"307",2015,"Immigration","EU15","Male",3.5,NA
+"308",2016,"Immigration","EU15","Male",6,NA
+"309",2006,"Immigration","EU28","Male",5,NA
+"310",2007,"Immigration","EU28","Male",9,NA
+"311",2008,"Immigration","EU28","Male",4,NA
+"312",2009,"Immigration","EU28","Male",2,NA
+"313",2010,"Immigration","EU28","Male",6,NA
+"314",2011,"Immigration","EU28","Male",6,NA
+"315",2012,"Immigration","EU28","Male",8,NA
+"316",2013,"Immigration","EU28","Male",10,NA
+"317",2014,"Immigration","EU28","Male",7,NA
+"318",2015,"Immigration","EU28","Male",12,NA
+"319",2016,"Immigration","EU28","Male",11,NA
+"320",2006,"Immigration","Other","Male",8,NA
+"321",2007,"Immigration","Other","Male",9.6,NA
+"322",2008,"Immigration","Other","Male",9.4,NA
+"323",2009,"Immigration","Other","Male",7,NA
+"324",2010,"Immigration","Other","Male",2.8,NA
+"325",2011,"Immigration","Other","Male",5.9,NA
+"326",2012,"Immigration","Other","Male",4.9,NA
+"327",2013,"Immigration","Other","Male",8.5,NA
+"328",2014,"Immigration","Other","Male",11.6,NA
+"329",2015,"Immigration","Other","Male",14.2,NA
+"330",2016,"Immigration","Other","Male",14.1,NA
+"331",2006,"Immigration","All","Female",47.5,NA
+"332",2007,"Immigration","All","Female",71.1,NA
+"333",2008,"Immigration","All","Female",59.5,NA
+"334",2009,"Immigration","All","Female",36.8,NA
+"335",2010,"Immigration","All","Female",21.4,NA
+"336",2011,"Immigration","All","Female",27.2,NA
+"337",2012,"Immigration","All","Female",27.8,NA
+"338",2013,"Immigration","All","Female",27.7,NA
+"339",2014,"Immigration","All","Female",32.4,NA
+"340",2015,"Immigration","All","Female",36.6,NA
+"341",2016,"Immigration","All","Female",40.6,NA
+"342",2006,"Immigration","Irish","Female",9.4,NA
+"343",2007,"Immigration","Irish","Female",15,NA
+"344",2008,"Immigration","Irish","Female",12,NA
+"345",2009,"Immigration","Irish","Female",10,NA
+"346",2010,"Immigration","Irish","Female",8.9,NA
+"347",2011,"Immigration","Irish","Female",9.7,NA
+"348",2012,"Immigration","Irish","Female",8.8,NA
+"349",2013,"Immigration","Irish","Female",6.3,NA
+"350",2014,"Immigration","Irish","Female",6.1,NA
+"351",2015,"Immigration","Irish","Female",5.8,NA
+"352",2016,"Immigration","Irish","Female",10.2,NA
+"353",2006,"Immigration","UK","Female",4.2,NA
+"354",2007,"Immigration","UK","Female",1.9,NA
+"355",2008,"Immigration","UK","Female",2.7,NA
+"356",2009,"Immigration","UK","Female",1.7,NA
+"357",2010,"Immigration","UK","Female",1.1,NA
+"358",2011,"Immigration","UK","Female",1.9,NA
+"359",2012,"Immigration","UK","Female",1.1,NA
+"360",2013,"Immigration","UK","Female",2.5,NA
+"361",2014,"Immigration","UK","Female",2.9,NA
+"362",2015,"Immigration","UK","Female",2.8,NA
+"363",2016,"Immigration","UK","Female",2.5,NA
+"364",2006,"Immigration","EU15","Female",6.2,NA
+"365",2007,"Immigration","EU15","Female",7.1,NA
+"366",2008,"Immigration","EU15","Female",5.7,NA
+"367",2009,"Immigration","EU15","Female",7.9,NA
+"368",2010,"Immigration","EU15","Female",3.6,NA
+"369",2011,"Immigration","EU15","Female",3.7,NA
+"370",2012,"Immigration","EU15","Female",4.8,NA
+"371",2013,"Immigration","EU15","Female",4.7,NA
+"372",2014,"Immigration","EU15","Female",4.3,NA
+"373",2015,"Immigration","EU15","Female",5.4,NA
+"374",2016,"Immigration","EU15","Female",3.9,NA
+"375",2006,"Immigration","EU28","Female",4,NA
+"376",2007,"Immigration","EU28","Female",6,NA
+"377",2008,"Immigration","EU28","Female",5,NA
+"378",2009,"Immigration","EU28","Female",2,NA
+"379",2010,"Immigration","EU28","Female",7,NA
+"380",2011,"Immigration","EU28","Female",9,NA
+"381",2012,"Immigration","EU28","Female",9,NA
+"382",2013,"Immigration","EU28","Female",10,NA
+"383",2014,"Immigration","EU28","Female",8,NA
+"384",2015,"Immigration","EU28","Female",12,NA
+"385",2016,"Immigration","EU28","Female",11,NA
+"386",2006,"Immigration","Other","Female",8.5,NA
+"387",2007,"Immigration","Other","Female",9.4,NA
+"388",2008,"Immigration","Other","Female",9.2,NA
+"389",2009,"Immigration","Other","Female",7.1,NA
+"390",2010,"Immigration","Other","Female",3.2,NA
+"391",2011,"Immigration","Other","Female",6.5,NA
+"392",2012,"Immigration","Other","Female",7.6,NA
+"393",2013,"Immigration","Other","Female",8.6,NA
+"394",2014,"Immigration","Other","Female",13.9,NA
+"395",2015,"Immigration","Other","Female",16.2,NA
+"396",2016,"Immigration","Other","Female",17.7,NA
+"397",2006,"Unemployed","Thousands","Both",30.7,"15 - 24 years"
+"398",2006,"Unemployed","Thousands","Both",96.7,"15 - 74 years"
+"399",2006,"Unemployed","Thousands","Both",66,"25 - 74 years"
+"400",2007,"Unemployed","Thousands","Both",33.7,"15 - 24 years"
+"401",2007,"Unemployed","Thousands","Both",105.1,"15 - 74 years"
+"402",2007,"Unemployed","Thousands","Both",71.4,"25 - 74 years"
+"403",2008,"Unemployed","Thousands","Both",46.9,"15 - 24 years"
+"404",2008,"Unemployed","Thousands","Both",145.8,"15 - 74 years"
+"405",2008,"Unemployed","Thousands","Both",98.9,"25 - 74 years"
+"406",2009,"Unemployed","Thousands","Both",74.6,"15 - 24 years"
+"407",2009,"Unemployed","Thousands","Both",267.6,"15 - 74 years"
+"408",2009,"Unemployed","Thousands","Both",193,"25 - 74 years"
+"409",2010,"Unemployed","Thousands","Both",73.5,"15 - 24 years"
+"410",2010,"Unemployed","Thousands","Both",303,"15 - 74 years"
+"411",2010,"Unemployed","Thousands","Both",229.6,"25 - 74 years"
+"412",2011,"Unemployed","Thousands","Both",69.8,"15 - 24 years"
+"413",2011,"Unemployed","Thousands","Both",317,"15 - 74 years"
+"414",2011,"Unemployed","Thousands","Both",247.1,"25 - 74 years"
+"415",2012,"Unemployed","Thousands","Both",68.2,"15 - 24 years"
+"416",2012,"Unemployed","Thousands","Both",315.9,"15 - 74 years"
+"417",2012,"Unemployed","Thousands","Both",247.7,"25 - 74 years"
+"418",2013,"Unemployed","Thousands","Both",56.9,"15 - 24 years"
+"419",2013,"Unemployed","Thousands","Both",282.1,"15 - 74 years"
+"420",2013,"Unemployed","Thousands","Both",225.2,"25 - 74 years"
+"421",2014,"Unemployed","Thousands","Both",46.9,"15 - 24 years"
+"422",2014,"Unemployed","Thousands","Both",242.8,"15 - 74 years"
+"423",2014,"Unemployed","Thousands","Both",196,"25 - 74 years"
+"424",2015,"Unemployed","Thousands","Both",39.3,"15 - 24 years"
+"425",2015,"Unemployed","Thousands","Both",203.7,"15 - 74 years"
+"426",2015,"Unemployed","Thousands","Both",164.4,"25 - 74 years"
+"427",2016,"Unemployed","Thousands","Both",34.5,"15 - 24 years"
+"428",2016,"Unemployed","Thousands","Both",172.7,"15 - 74 years"
+"429",2016,"Unemployed","Thousands","Both",138.2,"25 - 74 years"
+"430",2017,"Unemployed","Thousands","Both",25.6,"15 - 24 years"
+"431",2017,"Unemployed","Thousands","Both",144.7,"15 - 74 years"
+"432",2017,"Unemployed","Thousands","Both",119.1,"25 - 74 years"
+"433",2006,"Unemployed","Thousands","Male",17.4,"15 - 24 years"
+"434",2006,"Unemployed","Thousands","Male",57.8,"15 - 74 years"
+"435",2006,"Unemployed","Thousands","Male",40.5,"25 - 74 years"
+"436",2007,"Unemployed","Thousands","Male",19.8,"15 - 24 years"
+"437",2007,"Unemployed","Thousands","Male",64,"15 - 74 years"
+"438",2007,"Unemployed","Thousands","Male",44.2,"25 - 74 years"
+"439",2008,"Unemployed","Thousands","Male",29.9,"15 - 24 years"
+"440",2008,"Unemployed","Thousands","Male",97.3,"15 - 74 years"
+"441",2008,"Unemployed","Thousands","Male",67.5,"25 - 74 years"
+"442",2009,"Unemployed","Thousands","Male",49,"15 - 24 years"
+"443",2009,"Unemployed","Thousands","Male",187.3,"15 - 74 years"
+"444",2009,"Unemployed","Thousands","Male",138.4,"25 - 74 years"
+"445",2010,"Unemployed","Thousands","Male",46,"15 - 24 years"
+"446",2010,"Unemployed","Thousands","Male",207.5,"15 - 74 years"
+"447",2010,"Unemployed","Thousands","Male",161.5,"25 - 74 years"
+"448",2011,"Unemployed","Thousands","Male",43.6,"15 - 24 years"
+"449",2011,"Unemployed","Thousands","Male",212.9,"15 - 74 years"
+"450",2011,"Unemployed","Thousands","Male",169.4,"25 - 74 years"
+"451",2012,"Unemployed","Thousands","Male",42.1,"15 - 24 years"
+"452",2012,"Unemployed","Thousands","Male",210.1,"15 - 74 years"
+"453",2012,"Unemployed","Thousands","Male",168.1,"25 - 74 years"
+"454",2013,"Unemployed","Thousands","Male",33.1,"15 - 24 years"
+"455",2013,"Unemployed","Thousands","Male",178.4,"15 - 74 years"
+"456",2013,"Unemployed","Thousands","Male",145.3,"25 - 74 years"
+"457",2014,"Unemployed","Thousands","Male",27.9,"15 - 24 years"
+"458",2014,"Unemployed","Thousands","Male",152.6,"15 - 74 years"
+"459",2014,"Unemployed","Thousands","Male",124.8,"25 - 74 years"
+"460",2015,"Unemployed","Thousands","Male",24.2,"15 - 24 years"
+"461",2015,"Unemployed","Thousands","Male",129.5,"15 - 74 years"
+"462",2015,"Unemployed","Thousands","Male",105.3,"25 - 74 years"
+"463",2016,"Unemployed","Thousands","Male",20.9,"15 - 24 years"
+"464",2016,"Unemployed","Thousands","Male",108.6,"15 - 74 years"
+"465",2016,"Unemployed","Thousands","Male",87.6,"25 - 74 years"
+"466",2017,"Unemployed","Thousands","Male",14.4,"15 - 24 years"
+"467",2017,"Unemployed","Thousands","Male",87.3,"15 - 74 years"
+"468",2017,"Unemployed","Thousands","Male",72.9,"25 - 74 years"
+"469",2006,"Unemployed","Thousands","Female",13.3,"15 - 24 years"
+"470",2006,"Unemployed","Thousands","Female",38.9,"15 - 74 years"
+"471",2006,"Unemployed","Thousands","Female",25.5,"25 - 74 years"
+"472",2007,"Unemployed","Thousands","Female",13.8,"15 - 24 years"
+"473",2007,"Unemployed","Thousands","Female",41,"15 - 74 years"
+"474",2007,"Unemployed","Thousands","Female",27.2,"25 - 74 years"
+"475",2008,"Unemployed","Thousands","Female",17.1,"15 - 24 years"
+"476",2008,"Unemployed","Thousands","Female",48.4,"15 - 74 years"
+"477",2008,"Unemployed","Thousands","Female",31.4,"25 - 74 years"
+"478",2009,"Unemployed","Thousands","Female",25.7,"15 - 24 years"
+"479",2009,"Unemployed","Thousands","Female",80.2,"15 - 74 years"
+"480",2009,"Unemployed","Thousands","Female",54.6,"25 - 74 years"
+"481",2010,"Unemployed","Thousands","Female",27.4,"15 - 24 years"
+"482",2010,"Unemployed","Thousands","Female",95.5,"15 - 74 years"
+"483",2010,"Unemployed","Thousands","Female",68.1,"25 - 74 years"
+"484",2011,"Unemployed","Thousands","Female",26.3,"15 - 24 years"
+"485",2011,"Unemployed","Thousands","Female",104,"15 - 74 years"
+"486",2011,"Unemployed","Thousands","Female",77.8,"25 - 74 years"
+"487",2012,"Unemployed","Thousands","Female",26.1,"15 - 24 years"
+"488",2012,"Unemployed","Thousands","Female",105.8,"15 - 74 years"
+"489",2012,"Unemployed","Thousands","Female",79.7,"25 - 74 years"
+"490",2013,"Unemployed","Thousands","Female",23.8,"15 - 24 years"
+"491",2013,"Unemployed","Thousands","Female",103.7,"15 - 74 years"
+"492",2013,"Unemployed","Thousands","Female",79.9,"25 - 74 years"
+"493",2014,"Unemployed","Thousands","Female",19,"15 - 24 years"
+"494",2014,"Unemployed","Thousands","Female",90.2,"15 - 74 years"
+"495",2014,"Unemployed","Thousands","Female",71.2,"25 - 74 years"
+"496",2015,"Unemployed","Thousands","Female",15.1,"15 - 24 years"
+"497",2015,"Unemployed","Thousands","Female",74.2,"15 - 74 years"
+"498",2015,"Unemployed","Thousands","Female",59.1,"25 - 74 years"
+"499",2016,"Unemployed","Thousands","Female",13.6,"15 - 24 years"
+"500",2016,"Unemployed","Thousands","Female",64.1,"15 - 74 years"
+"501",2016,"Unemployed","Thousands","Female",50.5,"25 - 74 years"
+"502",2017,"Unemployed","Thousands","Female",11.2,"15 - 24 years"
+"503",2017,"Unemployed","Thousands","Female",57.4,"15 - 74 years"
+"504",2017,"Unemployed","Thousands","Female",46.2,"25 - 74 years"
+"505",2006,"Unemployed","Percentage","Both",8.7,"15 - 24 years"
+"506",2006,"Unemployed","Percentage","Both",4.5,"15 - 74 years"
+"507",2006,"Unemployed","Percentage","Both",3.7,"25 - 74 years"
+"508",2007,"Unemployed","Percentage","Both",9.1,"15 - 24 years"
+"509",2007,"Unemployed","Percentage","Both",4.7,"15 - 74 years"
+"510",2007,"Unemployed","Percentage","Both",3.8,"25 - 74 years"
+"511",2008,"Unemployed","Percentage","Both",13.3,"15 - 24 years"
+"512",2008,"Unemployed","Percentage","Both",6.4,"15 - 74 years"
+"513",2008,"Unemployed","Percentage","Both",5.2,"25 - 74 years"
+"514",2009,"Unemployed","Percentage","Both",24.1,"15 - 24 years"
+"515",2009,"Unemployed","Percentage","Both",12,"15 - 74 years"
+"516",2009,"Unemployed","Percentage","Both",10.1,"25 - 74 years"
+"517",2010,"Unemployed","Percentage","Both",27.7,"15 - 24 years"
+"518",2010,"Unemployed","Percentage","Both",13.9,"15 - 74 years"
+"519",2010,"Unemployed","Percentage","Both",12,"25 - 74 years"
+"520",2011,"Unemployed","Percentage","Both",29.1,"15 - 24 years"
+"521",2011,"Unemployed","Percentage","Both",14.7,"15 - 74 years"
+"522",2011,"Unemployed","Percentage","Both",12.9,"25 - 74 years"
+"523",2012,"Unemployed","Percentage","Both",30.4,"15 - 24 years"
+"524",2012,"Unemployed","Percentage","Both",14.7,"15 - 74 years"
+"525",2012,"Unemployed","Percentage","Both",12.9,"25 - 74 years"
+"526",2013,"Unemployed","Percentage","Both",26.8,"15 - 24 years"
+"527",2013,"Unemployed","Percentage","Both",13.1,"15 - 74 years"
+"528",2013,"Unemployed","Percentage","Both",11.6,"25 - 74 years"
+"529",2014,"Unemployed","Percentage","Both",23.9,"15 - 24 years"
+"530",2014,"Unemployed","Percentage","Both",11.3,"15 - 74 years"
+"531",2014,"Unemployed","Percentage","Both",10,"25 - 74 years"
+"532",2015,"Unemployed","Percentage","Both",20.9,"15 - 24 years"
+"533",2015,"Unemployed","Percentage","Both",9.4,"15 - 74 years"
+"534",2015,"Unemployed","Percentage","Both",8.3,"25 - 74 years"
+"535",2016,"Unemployed","Percentage","Both",17.2,"15 - 24 years"
+"536",2016,"Unemployed","Percentage","Both",7.9,"15 - 74 years"
+"537",2016,"Unemployed","Percentage","Both",7,"25 - 74 years"
+"538",2017,"Unemployed","Percentage","Both",12.8,"15 - 24 years"
+"539",2017,"Unemployed","Percentage","Both",6.6,"15 - 74 years"
+"540",2017,"Unemployed","Percentage","Both",6,"25 - 74 years"
+"541",2006,"Unemployed","Percentage","Male",9,"15 - 24 years"
+"542",2006,"Unemployed","Percentage","Male",4.7,"15 - 74 years"
+"543",2006,"Unemployed","Percentage","Male",3.9,"25 - 74 years"
+"544",2007,"Unemployed","Percentage","Male",9.9,"15 - 24 years"
+"545",2007,"Unemployed","Percentage","Male",5,"15 - 74 years"
+"546",2007,"Unemployed","Percentage","Male",4.1,"25 - 74 years"
+"547",2008,"Unemployed","Percentage","Male",16.2,"15 - 24 years"
+"548",2008,"Unemployed","Percentage","Male",7.6,"15 - 74 years"
+"549",2008,"Unemployed","Percentage","Male",6.1,"25 - 74 years"
+"550",2009,"Unemployed","Percentage","Male",30.7,"15 - 24 years"
+"551",2009,"Unemployed","Percentage","Male",15.1,"15 - 74 years"
+"552",2009,"Unemployed","Percentage","Male",12.8,"25 - 74 years"
+"553",2010,"Unemployed","Percentage","Male",33.7,"15 - 24 years"
+"554",2010,"Unemployed","Percentage","Male",17.1,"15 - 74 years"
+"555",2010,"Unemployed","Percentage","Male",15,"25 - 74 years"
+"556",2011,"Unemployed","Percentage","Male",35,"15 - 24 years"
+"557",2011,"Unemployed","Percentage","Male",17.8,"15 - 74 years"
+"558",2011,"Unemployed","Percentage","Male",15.8,"25 - 74 years"
+"559",2012,"Unemployed","Percentage","Male",36.4,"15 - 24 years"
+"560",2012,"Unemployed","Percentage","Male",17.7,"15 - 74 years"
+"561",2012,"Unemployed","Percentage","Male",15.7,"25 - 74 years"
+"562",2013,"Unemployed","Percentage","Male",29.8,"15 - 24 years"
+"563",2013,"Unemployed","Percentage","Male",15,"15 - 74 years"
+"564",2013,"Unemployed","Percentage","Male",13.5,"25 - 74 years"
+"565",2014,"Unemployed","Percentage","Male",26.6,"15 - 24 years"
+"566",2014,"Unemployed","Percentage","Male",12.9,"15 - 74 years"
+"567",2014,"Unemployed","Percentage","Male",11.6,"25 - 74 years"
+"568",2015,"Unemployed","Percentage","Male",23.7,"15 - 24 years"
+"569",2015,"Unemployed","Percentage","Male",10.9,"15 - 74 years"
+"570",2015,"Unemployed","Percentage","Male",9.7,"25 - 74 years"
+"571",2016,"Unemployed","Percentage","Male",19.4,"15 - 24 years"
+"572",2016,"Unemployed","Percentage","Male",9.1,"15 - 74 years"
+"573",2016,"Unemployed","Percentage","Male",8.1,"25 - 74 years"
+"574",2017,"Unemployed","Percentage","Male",14,"15 - 24 years"
+"575",2017,"Unemployed","Percentage","Male",7.3,"15 - 74 years"
+"576",2017,"Unemployed","Percentage","Male",6.6,"25 - 74 years"
+"577",2006,"Unemployed","Percentage","Female",8.3,"15 - 24 years"
+"578",2006,"Unemployed","Percentage","Female",4.3,"15 - 74 years"
+"579",2006,"Unemployed","Percentage","Female",3.4,"25 - 74 years"
+"580",2007,"Unemployed","Percentage","Female",8,"15 - 24 years"
+"581",2007,"Unemployed","Percentage","Female",4.3,"15 - 74 years"
+"582",2007,"Unemployed","Percentage","Female",3.5,"25 - 74 years"
+"583",2008,"Unemployed","Percentage","Female",10.2,"15 - 24 years"
+"584",2008,"Unemployed","Percentage","Female",4.9,"15 - 74 years"
+"585",2008,"Unemployed","Percentage","Female",3.9,"25 - 74 years"
+"586",2009,"Unemployed","Percentage","Female",17,"15 - 24 years"
+"587",2009,"Unemployed","Percentage","Female",8.2,"15 - 74 years"
+"588",2009,"Unemployed","Percentage","Female",6.6,"25 - 74 years"
+"589",2010,"Unemployed","Percentage","Female",21.3,"15 - 24 years"
+"590",2010,"Unemployed","Percentage","Female",9.9,"15 - 74 years"
+"591",2010,"Unemployed","Percentage","Female",8.1,"25 - 74 years"
+"592",2011,"Unemployed","Percentage","Female",22.8,"15 - 24 years"
+"593",2011,"Unemployed","Percentage","Female",10.8,"15 - 74 years"
+"594",2011,"Unemployed","Percentage","Female",9.2,"25 - 74 years"
+"595",2012,"Unemployed","Percentage","Female",24,"15 - 24 years"
+"596",2012,"Unemployed","Percentage","Female",11,"15 - 74 years"
+"597",2012,"Unemployed","Percentage","Female",9.3,"25 - 74 years"
+"598",2013,"Unemployed","Percentage","Female",23.5,"15 - 24 years"
+"599",2013,"Unemployed","Percentage","Female",10.7,"15 - 74 years"
+"600",2013,"Unemployed","Percentage","Female",9.2,"25 - 74 years"
+"601",2014,"Unemployed","Percentage","Female",20.9,"15 - 24 years"
+"602",2014,"Unemployed","Percentage","Female",9.4,"15 - 74 years"
+"603",2014,"Unemployed","Percentage","Female",8.2,"25 - 74 years"
+"604",2015,"Unemployed","Percentage","Female",17.6,"15 - 24 years"
+"605",2015,"Unemployed","Percentage","Female",7.7,"15 - 74 years"
+"606",2015,"Unemployed","Percentage","Female",6.7,"25 - 74 years"
+"607",2016,"Unemployed","Percentage","Female",14.5,"15 - 24 years"
+"608",2016,"Unemployed","Percentage","Female",6.5,"15 - 74 years"
+"609",2016,"Unemployed","Percentage","Female",5.7,"25 - 74 years"
+"610",2017,"Unemployed","Percentage","Female",11.5,"15 - 24 years"
+"611",2017,"Unemployed","Percentage","Female",5.8,"15 - 74 years"
+"612",2017,"Unemployed","Percentage","Female",5.1,"25 - 74 years"

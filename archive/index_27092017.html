@@ -51,15 +51,6 @@
       /* main charting function using d3.js */
       "use strict";
 
-      // Function to filter data down to selected Sex / nationality
-      var data = data.filter(function(d) { return d['Sex'] === 'Both' && d['Nationality'] === 'All'})
-
-      // seperation into line data. Keeping unfiltered data for extent etc
-
-      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' })
-
-      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' })
-
       var margin = {top: 50, right: 100, bottom: 50, left: 100},
           width = 1000 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
@@ -75,7 +66,7 @@
       
 
       var year_extent = d3.extent(data, function(d) {
-        return d['Year'];
+        return d['YEAR'];
       })
 
       var x_scale = d3.scaleTime()
@@ -85,7 +76,11 @@
       var x_axis = d3.axisBottom(x_scale);
 
       var y_extent = d3.extent(data, function(d) {
-        return d['Result'];
+        return d['Irish'];
+      })
+
+      var y1_extent = d3.extent(data, function(d) {
+        return d['Irish'];
       })
 
       var y_scale = d3.scaleLinear()
@@ -109,70 +104,45 @@
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 		      .call(y_axis);
 	  	
-
       var valueline = d3.line()
-          .x(function(d) { return x_scale(d.Year); })
-          .y(function(d) { return y_scale(d.Result); });
+          .x(function(d) { return x_scale(d.YEAR); })
+          .y(function(d) { return y_scale(d.Irish); });
 
-      // Add lines 
-      svg.selectAll("l1")
-        .data(l1_data)
-        .enter()
-
-
+      // Add line
       svg.append("path")
         .attr("class", "line")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", valueline(l1_data));
+        .attr("d", valueline(data));
 
       svg.selectAll("circle")
-        .data(l1_data)
+        .data(data)
         .enter()
         .append("circle")
         .attr("r", 6)
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("cx", function(d) { return x_scale(d.Year); })
-        .attr("cy", function(d) { return y_scale(d.Result); });
-
-        debugger;
-
-      // Add line 2
-      svg.append("path")
-        .attr("class", "line")
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", valueline(l2_data));
-
-      svg.selectAll("circle")
-        .data(l2_data)
-        .enter()
-        .style("fill","blue")
-        .append("circle")
-        .attr("r", 6)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("cx", function(d) { return x_scale(d.Year); })
-        .attr("cy", function(d) { return y_scale(d.Result); });
-        debugger;
+        .attr("cx", function(d) { return x_scale(d.YEAR); })
+        .attr("cy", function(d) { return y_scale(d.Irish); });
+      
+      debugger;
 
     } /* draw_chart END */
-
-    function main() {
-      var formatYear = d3.timeParse("%Y");
-
-      d3.csv("data/combined_data.csv", function(d) {
-        d.Year = formatYear(d.Year);
-        d.Result = +d.Result;
-        return d;
-      }, draw_chart);
-    }
-
     </script>
   </head>
 <body>
   <script type="text/javascript">
-  /*  call main d3.js script  */
+  /*  Load data and  */
   
-  main()
+  var formatYear = d3.timeParse("%Y");
 
+  d3.csv("data/Emmigration.csv", function(d) {
+    d['YEAR'] = formatYear(d['YEAR'])
+    return d;
+  }, draw_chart);
+
+  d3.csv("data/Emmigration.csv", function(d) {
+    d['YEAR'] = formatYear(d['YEAR'])
+    return d;
+  }, draw_chart);
   </script>
 <h1>Economic Recession and its Impact on Immigration and Emigration in Ireland (2006 - 2016)</h1>
 <h2>Data Visualisation Project - Donal O Farrell</h2>

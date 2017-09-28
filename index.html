@@ -37,6 +37,10 @@
         stroke: red;
 		color: red;
       }
+	  #l3_data {
+        stroke: blue;
+		color: blue;
+      }
       .line_plot {
         fill: none;
         stroke: #4eb0bb;
@@ -58,13 +62,15 @@
       "use strict";
 
       // Function to filter data down to selected Sex / nationality
-      var data = data.filter(function(d) { return d['Sex'] === 'Both' && d['Nationality'] === 'All'})
+      var data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage' ) })
 
       // seperation into line data. Keeping unfiltered data for extent etc
 
       var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' })
 
       var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' })
+	  
+	  var l3_data = data.filter(function(d) { return d['Header'] === 'Unemployed' && d['Age.Group'] === '15 - 74 years'  })
 
 	  
       var margin = {top: 50, right: 100, bottom: 50, left: 100},
@@ -102,6 +108,18 @@
       var y_axis = d3.axisLeft(y_scale)
         .ticks(10);
 
+      // Second y axis on right of graph	
+	  var y_r_extent = d3.extent(l3_data, function(d) {
+        return d['Result'];
+      })
+
+      var y_r_scale = d3.scaleLinear()
+          .domain(y_r_extent)
+          .range([height, 0]);
+    
+      var y_r_axis = d3.axisRight(y_r_scale)
+        .ticks(10);
+
       // Add x axis
       svg.append('g')
           .attr('class', 'x axis')
@@ -115,6 +133,12 @@
           .attr('class', 'y axis')
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 		      .call(y_axis);
+	  // add y axis on right hand side	  
+	  svg.append('g')
+          .attr('class', 'y r axis')
+		  .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+              .call(y_r_axis);
+		debugger;
 	  	
       var valueline = d3.line()
           .x(function(d) { return x_scale(d.Year); })
@@ -128,7 +152,7 @@
 		  .attr("id", "l1_data")
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
           .attr("d", valueline(l1_data));
-		  debugger;
+
    
 	  l1.selectAll("circle")
         .data(l1_data)
@@ -139,18 +163,16 @@
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
         .attr("cx", function(d) { return x_scale(d.Year); })
         .attr("cy", function(d) { return y_scale(d.Result); });
-
-        debugger;
-
+      
+	  //adding second line chart
       var l2 = svg.append('g')
-	      .attr('class', 'l1')
+	      .attr('class', 'l2');
 		  
 	  l2.append('path')
 		  .attr("class", "line")
 		  .attr("id", "l2_data")
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
           .attr("d", valueline(l2_data));
-		  debugger;
    
 	  l2.selectAll("circle")
         .data(l2_data)
@@ -161,6 +183,32 @@
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
         .attr("cx", function(d) { return x_scale(d.Year); })
         .attr("cy", function(d) { return y_scale(d.Result); });
+        debugger;
+		
+	// Add 3rd line chart
+	 var valueline_right = d3.line()
+          .x(function(d) { return x_scale(d.Year); })
+          .y(function(d) { return y_r_scale(d.Result); });
+		  
+	 var l3 = svg.append('g')
+	      .attr('class', 'l3');
+		  
+		  
+	  l3.append('path')
+		.attr("class", "line")
+		.attr("id", "l3_data")
+	    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+		.attr("d", valueline_right(l3_data));
+   
+	  l3.selectAll("circle")
+        .data(l3_data)
+        .enter()
+        .append("circle")
+		.attr("id", "l3_data")
+        .attr("r", 6)
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+		.attr("cx", function(d) { return x_scale(d.Year); })
+        .attr("cy", function(d) { return y_r_scale(d.Result); });
         debugger;
 
     } /* draw_chart END */

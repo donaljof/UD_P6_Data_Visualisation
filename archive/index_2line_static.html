@@ -58,13 +58,15 @@
       "use strict";
 
       // Function to filter data down to selected Sex / nationality
-      var data = data.filter(function(d) { return d['Sex'] === 'Both' && d['Nationality'] === 'All'})
+      var data = data.filter(function(d) { return d['Sex'] === 'Both' })
 
       // seperation into line data. Keeping unfiltered data for extent etc
 
-      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' })
+      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' && d['Nationality'] === 'All' })
 
-      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' })
+      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration'&& d['Nationality'] === 'All' })
+	  
+	  var l3_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Nationality'] === 'Percentage' && d['Age.Group'] === '25 - 74 years'  })
 
 	  
       var margin = {top: 50, right: 100, bottom: 50, left: 100},
@@ -102,6 +104,18 @@
       var y_axis = d3.axisLeft(y_scale)
         .ticks(10);
 
+      // Second y axis on right of graph	
+	  var y_r_extent = d3.extent(l3_data, function(d) {
+        return d['Result'];
+      })
+
+      var y_r_scale = d3.scaleLinear()
+          .domain(y_extent)
+          .range([height, 0]);
+    
+      var y_r_axis = d3.axisRight(y_r_scale)
+        .ticks(10);
+
       // Add x axis
       svg.append('g')
           .attr('class', 'x axis')
@@ -115,6 +129,12 @@
           .attr('class', 'y axis')
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 		      .call(y_axis);
+	  // add y axis on right hand side	  
+	  svg.append('g')
+          .attr('class', 'y r axis')
+		  .attr("transform", "translate(" + margin.right + ", " + margin.top + ")")
+              .call(y_r_axis);
+		debugger;
 	  	
       var valueline = d3.line()
           .x(function(d) { return x_scale(d.Year); })
@@ -128,7 +148,7 @@
 		  .attr("id", "l1_data")
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
           .attr("d", valueline(l1_data));
-		  debugger;
+
    
 	  l1.selectAll("circle")
         .data(l1_data)
@@ -140,17 +160,14 @@
         .attr("cx", function(d) { return x_scale(d.Year); })
         .attr("cy", function(d) { return y_scale(d.Result); });
 
-        debugger;
-
       var l2 = svg.append('g')
-	      .attr('class', 'l1')
+	      .attr('class', 'l2')
 		  
 	  l2.append('path')
 		  .attr("class", "line")
 		  .attr("id", "l2_data")
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
           .attr("d", valueline(l2_data));
-		  debugger;
    
 	  l2.selectAll("circle")
         .data(l2_data)

@@ -2,7 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-setwd("C:/Users/Donal/Documents/GitHub/UD_P6_Data_Visualisation")
+setwd("C:/Users/Donal/Documents/GitHub/UD_P6_Data_Visualisation/")
 
 IM <- read.csv("data/Estimated_Immigration_Persons in April_Thousand.csv")
 
@@ -30,18 +30,18 @@ ggplot(EM, aes(x  = Year, y = Irish)) +
 
 UN <- read.csv("data/Monthly_employment.csv",stringsAsFactors=FALSE, header = TRUE)
 
-colnames(UN)[3] <- "Unemployed Thousands Both"
-colnames(UN)[4] <- "Unemployed Thousands Male"
-colnames(UN)[5] <- "Unemployed Thousands Female"
-colnames(UN)[6] <- "Unemployed Percentage Both"
-colnames(UN)[7] <- "Unemployed Percentage Male"
-colnames(UN)[8] <- "Unemployed Percentage Female"
+colnames(UN)[3] <- "Unemployment Thousands Both"
+colnames(UN)[4] <- "Unemployment Thousands Male"
+colnames(UN)[5] <- "Unemployment Thousands Female"
+colnames(UN)[6] <- "Unemployment Percentage Both"
+colnames(UN)[7] <- "Unemployment Percentage Male"
+colnames(UN)[8] <- "Unemployment Percentage Female"
 
 UN$Year <- substr(UN$Month, 1,4)
 
 unique(UN$Year)
 
-UN <- subset(UN, UN$Year >= 2006)
+UN <- subset(UN, UN$Year >= 2006 & UN$Year < 2017)
 UN$Year <- as.integer(UN$Year)
 
 UN.sum <- UN %>% 

@@ -32,17 +32,17 @@
   	  circle {
   	    opacity: 0.2;
   	  }
-      #line1 {
+      #l1_data {
         stroke: green;
 		    color: green;
         font-family: arial;
       }
-      #line2 {
+      #l2_data {
         stroke: red;
 		    color: red;
         font-family: arial;
       }
-  	  #line3 {
+  	  #l3_data {
         stroke: blue;
         color: blue;
         font-family: arial;
@@ -68,15 +68,15 @@
 
 
       // Function to filter data down to selected Sex / nationality
-      var data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage' ) });
+      var data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage' ) })
 
       // seperation into line data. Keeping unfiltered data for extent etc
 
-      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' });
+      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' })
 
-      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' });
+      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' })
 	  
-	    var l3_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === '15 - 74 years'  });
+	    var l3_data = data.filter(function(d) { return d['Header'] === 'Unemployed' && d['Age.Group'] === '15 - 74 years'  })
 
 	  
       var margin = {top: 50, right: 100, bottom: 50, left: 100},
@@ -164,65 +164,94 @@
           .x(function(d) { return x_scale(d.Year); })
           .y(function(d) { return y_scale(d.Result); });
 
-      var valueline_right = d3.line()
-          .x(function(d) { return x_scale(d.Year); })
-          .y(function(d) { return y_r_scale(d.Result); });
+	  var l1 = svg.append('g')
+	      .attr('class', 'l1');
 
-    //Function to gerate line for each 
+    l1.append("text")
+      .text('Emmigration')
+      .attr("transform", "translate(" + 750 + ", " + (margin.top + 20) + ")")
+      .attr("id", "l1_data");
+		  
+	  l1.append('path')
+		  .attr("class", "line")
+		  .attr("id", "l1_data")
+      .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+      .attr("d", valueline(l1_data));
 
-    var plot_lines = function(header, index) {
-      var line = svg.append('g')
-        .attr('class', 'l1');
-
-      var label_offset = 20 * index
-
-      var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-          return d['Header'] === header && d['Age.Group'] === '15 - 74 years'
-        }else{ 
-          return d['Header'] === header
-        } })
-      debugger;
-
-      line.append("text")
-        .text(header)
-        .attr("transform", "translate(" + 750 + ", " + (margin.top + label_offset) + ")")
-        .attr("id", "line" + index);
-      
-      line.append('path')
-        .attr("class", "line")
-        .attr("id", "line" + index)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", function(d) {
-          if (header === 'Unemployment') {
-
-            return valueline_right(line_data)
-            debugger;
-          }else{
-            debugger;
-            return valueline(line_data)
-          }});
-
-     
-      line.selectAll("circle")
-        .data(line_data)
+   
+	  l1.selectAll("circle")
+        .data(l1_data)
         .enter()
         .append("circle")
-          .attr("id", "line" + index)
-          .attr("r", 6)
+		.attr("id", "l1_data")
+        .attr("r", 6)
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+        .attr("cx", function(d) { return x_scale(d.Year); })
+        .attr("cy", function(d) { return y_scale(d.Result); });
+      
+	  //adding second line chart
+    var l2 = svg.append('g')
+	      .attr('class', 'l2');
+		
+    l2.append("text")
+      .text('Immigration')
+      .attr("transform", "translate(" + 750 + ", " + (margin.top + 40) + ")")
+      .attr("id", "l2_data");
+
+	  l2.append('path')
+		  .attr("class", "line")
+		  .attr("id", "l2_data")
           .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-          .attr("cx", function(d) { return x_scale(d.Year); })
-          .attr("cy", function(d) { if (header === 'Unemployment') {
-              return y_r_scale(d.Result)
-            }else{
-              return y_scale(d.Result)
-            }});
+          .attr("d", valueline(l2_data));
+   
+	  l2.selectAll("circle")
+        .data(l2_data)
+        .enter()
+        .append("circle")
+		.attr("id", "l2_data")
+        .attr("r", 6)
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+        .attr("cx", function(d) { return x_scale(d.Year); })
+        .attr("cy", function(d) { return y_scale(d.Result); });
+		
+	// Add 3rd line chart
+	 var valueline_right = d3.line()
+          .x(function(d) { return x_scale(d.Year); })
+          .y(function(d) { return y_r_scale(d.Result); });
+		  
+	 var l3 = svg.append('g')
+	      .attr('class', 'l3');
 
-    } 
+	 l3.append("text")
+      .text('Unemployment')
+      .attr("transform", "translate(" + 750 + ", " + (margin.top + 60) + ")")
+      .attr("id", "l3_data");
 
-    plot_lines('Emmigration', 1);
-    plot_lines('Immigration', 2);
-    plot_lines('Unemployment', 3);
+	 l3.append('path')
+  		.attr("class", "line")
+  		.attr("id", "l3_data")
+  	    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+  		.attr("d", valueline_right(l3_data));
+     
+   l3.selectAll("circle")
+      .data(l3_data)
+      .enter()
+      .append("circle")
+  	.attr("id", "l3_data")
+      .attr("r", 6)
+      .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+  	.attr("cx", function(d) { return x_scale(d.Year); })
+      .attr("cy", function(d) { return y_r_scale(d.Result); });
+
     debugger;
+/*
+    svg.append("g")
+      .append("text")
+      .text('some tezt')
+      .attr("fill", "black")
+      .attr("transform", "translate(" + 800 + ", " + (margin.top + 100) + ")")
+      .attr("id", "l1_data");
+*/
 
     } /* draw_chart END */
 

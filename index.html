@@ -61,180 +61,202 @@
     </style>
     <script type="text/javascript">  
     /* insert js here! */
-
+	
     function draw_chart(data) {
-      /* main charting function using d3.js */
-      "use strict";
+		/* main charting function using d3.js */
+		// "use strict";
+
+		// Function to filter data down to selected Sex / nationality
+		var init_data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage') });
+
+		var r_axis_data = init_data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === '15 - 74 years'  });
 
 
-      // Function to filter data down to selected Sex / nationality
-      var data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage' ) });
+		var margin = {top: 50, right: 100, bottom: 50, left: 100},
+		  width = 1000 - margin.left - margin.right,
+		  height = 500 - margin.top - margin.bottom;
 
-      // seperation into line data. Keeping unfiltered data for extent etc
 
-      var l1_data = data.filter(function(d) { return d['Header'] === 'Emmigration' });
 
-      var l2_data = data.filter(function(d) { return d['Header'] === 'Immigration' });
-	  
-	    var l3_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === '15 - 74 years'  });
+		var svg = d3.select("body")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		  .attr("height", height + margin.top + margin.bottom)
+		  .append('g')
+		  .attr('class', 'chart');
 
-	  
-      var margin = {top: 50, right: 100, bottom: 50, left: 100},
-          width = 1000 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
 
-      
-      
-  	  var svg = d3.select("body")
-  		.append("svg")
-  	    .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append('g')
-          .attr('class', 'chart');
-        
+		var year_extent = d3.extent(init_data, function(d) {
+		return d['Year'];
+		})
 
-      var year_extent = d3.extent(data, function(d) {
-        return d['Year'];
-      })
+		var x_scale = d3.scaleTime()
+		  .domain(year_extent)
+		  .range([0, width]);
 
-      var x_scale = d3.scaleTime()
-          .domain(year_extent)
-          .range([0, width]);
+		var x_axis = d3.axisBottom(x_scale);
 
-      var x_axis = d3.axisBottom(x_scale);
+		var y_extent = d3.extent(init_data, function(d) {
+		return d['Result'];
+		})
 
-      var y_extent = d3.extent(data, function(d) {
-        return d['Result'];
-      })
+		var y_scale = d3.scaleLinear()
+		  .domain(y_extent)
+		  .range([height, 0]);
 
-      var y_scale = d3.scaleLinear()
-          .domain(y_extent)
-          .range([height, 0]);
-    
-      var y_axis = d3.axisLeft(y_scale)
-        .ticks(10);
+		var y_axis = d3.axisLeft(y_scale)
+		.ticks(10);
 
-      // Second y axis on right of graph	
-	  var y_r_extent = d3.extent(l3_data, function(d) {
-        return d['Result'];
-      })
+		// Second y axis on right of graph	
+		var y_r_extent = d3.extent(r_axis_data, function(d) {
+		return d['Result'];
+		})
 
-      var y_r_scale = d3.scaleLinear()
-          .domain(y_r_extent)
-          .range([height, 0]);
-    
-      var y_r_axis = d3.axisRight(y_r_scale)
-        .ticks(10);
+		var y_r_scale = d3.scaleLinear()
+		  .domain(y_r_extent)
+		  .range([height, 0]);
 
-      // Add x axis
-      svg.append('g')
-          .attr('class', 'x axis')
-		      .attr("transform", "translate(" + margin.left +", "+ (height + margin.top) +")")
-          .call(x_axis)
-		      .style("text-anchor", "middle")
-		      .attr("font-family","arial");
+		var y_r_axis = d3.axisRight(y_r_scale)
+		.ticks(10);
 
-      // Add y axis
-      svg.append('g')
-          .attr('class', 'y axis')
-          .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-		      .call(y_axis)
-          .append("text")
-          .attr("fill", "#000")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", "0.71em")
-          .attr("text-anchor", "end")
-          .text("Thousand People");
+		// Add x axis
+		svg.append('g')
+		  .attr('class', 'x axis')
+			  .attr("transform", "translate(" + margin.left +", "+ (height + margin.top) +")")
+		  .call(x_axis)
+			  .style("text-anchor", "middle")
+			  .attr("font-family","arial");
 
-	  // add y axis on right hand side	  
-	  svg.append('g')
-          .attr('class', 'y r axis')
-		      .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
-            .call(y_r_axis)
-          .append("text")
-          .attr("fill", "#000")
-          .attr("transform", "rotate(-90)")
-          .attr("y", -12)
-          .attr("dy", "0.71em")
-          .attr("text-anchor", "end")
-          .text("% Unemplyment");
-	  	
-      var valueline = d3.line()
-          .x(function(d) { return x_scale(d.Year); })
-          .y(function(d) { return y_scale(d.Result); });
+		// Add y axis
+		svg.append('g')
+		  .attr('class', 'y axis')
+		  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+			  .call(y_axis)
+		  .append("text")
+		  .attr("fill", "#000")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", "0.71em")
+		  .attr("text-anchor", "end")
+		  .text("Thousand People");
 
-      var valueline_right = d3.line()
-          .x(function(d) { return x_scale(d.Year); })
-          .y(function(d) { return y_r_scale(d.Result); });
+		// add y axis on right hand side	  
+		svg.append('g')
+		  .attr('class', 'y r axis')
+			  .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+			.call(y_r_axis)
+		  .append("text")
+		  .attr("fill", "#000")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", -12)
+		  .attr("dy", "0.71em")
+		  .attr("text-anchor", "end")
+		  .text("% Unemplyment");
 
-    //Function to gerate line for each 
+		var valueline = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_scale(d.Result); });
 
-    var plot_lines = function(header, index) {
-      var line = svg.append('g')
-        .attr('class', 'l1');
+		var valueline_right = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_r_scale(d.Result); });
 
-      var label_offset = 20 * index
+		//Function to gerate line for each 
+		var plot_lines = function(header, index, sex) {
+			var line = svg.append('g')
+				.attr('class', 'l1');
 
-      var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-          return d['Header'] === header && d['Age.Group'] === '15 - 74 years'
-        }else{ 
-          return d['Header'] === header
-        } })
-      debugger;
+			var label_offset = 20 * index
 
-      line.append("text")
-        .text(header)
-        .attr("transform", "translate(" + 750 + ", " + (margin.top + label_offset) + ")")
-        .attr("id", "line" + index);
-      
-      line.append('path')
-        .attr("class", "line")
-        .attr("id", "line" + index)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", function(d) {
-          if (header === 'Unemployment') {
+			var line_data = data.filter(function(d) { if (header === 'Unemployment') {
+				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+				}else{ 
+				  return d['Header'] === header && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+				} })
 
-            return valueline_right(line_data)
-            debugger;
-          }else{
-            debugger;
-            return valueline(line_data)
-          }});
+			line.append("text")
+				.text(header)
+				.attr("transform", "translate(" + 750 + ", " + (margin.top + label_offset) + ")")
+				.attr("id", "line" + index);
 
-     
-      line.selectAll("circle")
-        .data(line_data)
-        .enter()
-        .append("circle")
-          .attr("id", "line" + index)
-          .attr("r", 6)
-          .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-          .attr("cx", function(d) { return x_scale(d.Year); })
-          .attr("cy", function(d) { if (header === 'Unemployment') {
-              return y_r_scale(d.Result)
-            }else{
-              return y_scale(d.Result)
-            }});
+			line.append('path')
+				.attr("class", "line")
+				.attr("id", "line" + index)
+				.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+				.attr("d", function(d) {
+				  if (header === 'Unemployment') {
+					return valueline_right(line_data)
+				  }else{
+					return valueline(line_data)
+				  }});
 
-    } 
 
-    plot_lines('Emmigration', 1);
-    plot_lines('Immigration', 2);
-    plot_lines('Unemployment', 3);
-    debugger;
+			line.selectAll("circle")
+				.data(line_data)
+				.enter()
+				.append("circle")
+				  .attr("id", "line" + index)
+				  .attr("r", 6)
+				  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+				  .attr("cx", function(d) { return x_scale(d.Year); })
+				  .attr("cy", function(d) { if (header === 'Unemployment') {
+					  return y_r_scale(d.Result)
+					}else{
+					  return y_scale(d.Result)
+					}});
+		}; //plot_lines END
 
-    } /* draw_chart END */
+		plot_lines( 'Emmigration', 1, 'Both');
+		plot_lines( 'Immigration', 2, 'Both');
+		plot_lines( 'Unemployment', 3, 'Both');
+		
+		// from http://bl.ocks.org/jfreels/6734823 
+		var selectbox = d3.select('body').append('div')
+				.append('select')
+				.attr('class','select')
+				.on('change', sexchange);
+
+		var sex_options = ["Both", "Male", "Female"];
+
+		var options = selectbox.selectAll('option')
+			.data(sex_options).enter()
+			.append('option')
+			.text(function (d) { return d; });
+
+
+		function sexchange() {
+			var value = d3.select('select').property('value')
+			
+			var filtered = data.filter(function(d) {
+                  return d['Sex'] === value;
+              }); 
+			
+			plot_lines( 'Emmigration', 1, value);
+			plot_lines( 'Immigration', 2, value);
+			plot_lines( 'Unemployment', 3, value);
+				
+			debugger;
+		}
+		
+
+    }; /* draw_chart END */
+	
+	function update_data(sex) {
+		var new_path = d3.select(path)
+	
+	}
 
     function main() {
-      var formatYear = d3.timeParse("%Y");
 
-      d3.csv("data/combined_data.csv", function(d) {
-        d.Year = formatYear(d.Year);
-        d.Result = +d.Result;
-        return d;
-      }, draw_chart);
-    }
+		var formatYear = d3.timeParse("%Y");
+
+		d3.csv("data/combined_data.csv", function(d) {
+			d.Year = formatYear(d.Year);
+			d.Result = +d.Result;
+			return d;
+			}, draw_chart);
+	  
+    };
 
     </script>
   </head>

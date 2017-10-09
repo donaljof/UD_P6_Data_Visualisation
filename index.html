@@ -164,7 +164,7 @@
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
 			var line = svg.append('g')
-				.attr('class', 'l1');
+        .attr("id", "line" + index);
 
 			var label_offset = 20 * index
 
@@ -209,6 +209,69 @@
 		plot_lines( 'Emmigration', 1, 'Both');
 		plot_lines( 'Immigration', 2, 'Both');
 		plot_lines( 'Unemployment', 3, 'Both');
+
+    // updater function - should be able to roll this into plot_lines as its similar
+
+    function update_lines(header, index, age_group, sex, nationality) {
+
+      var line_data = data.filter(function(d) { if (header === 'Unemployment') {
+          return d['Header'] === header && d['Age.Group'] === age_group && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+        }else{ 
+          return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
+        } })
+
+      var linename = 'g#line' + index
+
+      var line = svg.select(linename);
+
+      line.select('path')
+        .attr("class", "line")
+        .attr("id", "line" + index)
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+        .attr("d", function(d) {
+          if (header === 'Unemployment') {
+          return valueline_right(line_data)
+          }else{
+          return valueline(line_data)
+          }});
+
+      debugger;
+
+      var circles = line.selectAll("circle")
+        .data(line_data)
+        .attr("r", 20);
+
+      circles.remove()
+
+      circles.enter()
+        .append("circle")
+          .attr("id", "line" + index)
+          .attr("r", 6)
+          .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+          .attr("cx", function(d) { return x_scale(d.Year); })
+          .attr("cy", function(d) { if (header === 'Unemployment') {
+            return y_r_scale(d.Result)
+          }else{
+            return y_scale(d.Result)
+          }});
+      
+
+
+
+    }
+
+    // update lines
+    function sexchange() {
+      var value = d3.select('select').property('value')
+      
+      var filtered = data.filter(function(d) {
+                  return d['Sex'] === value;
+              }); 
+      
+      update_lines( 'Emmigration', 1, '15 - 74 years', value,'All');
+      update_lines( 'Immigration',2,'15 - 74 years', value, 'All');
+      update_lines( 'Unemployment',3, '15 - 74 years', value, 'All');
+    }
 		
 		// from http://bl.ocks.org/jfreels/6734823 
 		var selectbox = d3.select('body').append('div')
@@ -224,19 +287,7 @@
 			.text(function (d) { return d; });
 
 
-		function sexchange() {
-			var value = d3.select('select').property('value')
-			
-			var filtered = data.filter(function(d) {
-                  return d['Sex'] === value;
-              }); 
-			
-			plot_lines( 'Emmigration', 1, value);
-			plot_lines( 'Immigration', 2, value);
-			plot_lines( 'Unemployment', 3, value);
-				
-			debugger;
-		}
+		
 		
 
     }; /* draw_chart END */

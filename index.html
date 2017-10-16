@@ -69,7 +69,7 @@
 		// Function to filter data down to selected Sex / nationality
 		var init_data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage') });
 
-		var r_axis_data = init_data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === '15 - 74 years'  });
+		var r_axis_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] == '15 - 74 years' && d['Nationality'] === 'Percentage' });
 
 
 		var margin = {top: 50, right: 100, bottom: 50, left: 100},
@@ -151,7 +151,7 @@
 		  .attr("y", -12)
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "end")
-		  .text("% Unemplyment");
+		  .text("% Unempolyment");
 
 		var valueline = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
@@ -160,6 +160,8 @@
 		var valueline_right = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_r_scale(d.Result); });
+		  
+		debugger;
 
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
@@ -170,9 +172,9 @@
 			var label_offset = 20 * index
 
 			var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && d['Nationality'] === 'Percentage';
 				}else{ 
-				  return d['Header'] === header && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+				  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === 'All';
 				} })
 
 			line.append("text")
@@ -215,54 +217,38 @@
 
     function update_lines(header, index, age_group, sex, nationality) {
 
-      //data for graph, now filtered bu update entered as part of funtion
-      var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-          return d['Header'] === header && d['Age.Group'] === age_group && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
-        }else{ 
-          return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
-        } })
+		//data for graph, now filtered bu update entered as part of funtion
+		var line_data = data.filter(function(d) { if (header === 'Unemployment') {
+		  return d['Header'] === header && d['Age.Group'] === age_group && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+		}else{ 
+		  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
+		} })
 
-      //line id for correct selection
-       var linename = 'g#line' + index
+		//line id for correct selection
+		var linename = 'g#line' + index
 
-      var line = svg.select(linename);
+		var line = svg.select(linename);
 
-      //update path with new filtered data 
-      line.select('path')
-        .attr("class", "line")
-        .attr("id", "line" + index)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", function(d) {
-          if (header === 'Unemployment') {
-          return valueline_right(line_data)
-          }else{
-          return valueline(line_data)
-          }});
+		//update path with new filtered data 
+		line.select('path')
+			.attr("class", "line")
+			.attr("id", "line" + index)
+			.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+			.attr("d", function(d) {
+			  if (header === 'Unemployment') {
+			  return valueline_right(line_data)
+			  }else{
+			  return valueline(line_data)
+			  }});
 
-      debugger;
-
-      //select circle elements of line x <g> and connect filtered data
-      var circles = line.selectAll("circle")
-        .data(line_data);
-
-      debugger;
-      //remove old circles
-      circles.exit().remove();
-
-      //add new circles based on current data
-      circles.enter()
-        .append("circle")
-        .attr("id", "line" + index)
-        .attr("r", 6)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("cx", function(d) { return x_scale(d.Year); })
-        .attr("cy", function(d) { if (header === 'Unemployment') {
-          return y_r_scale(d.Result)
-        }else{
-          return y_scale(d.Result)
-        }});
-
-        debugger;
+		//select circle elements of line x <g>, connect to filtered data and update y
+		var circles = line.selectAll("circle")
+			.data(line_data)
+			.attr("cy", function(d) { if (header === 'Unemployment') {
+			  return y_r_scale(d.Result)
+			}else{
+			  return y_scale(d.Result)
+			}});
     }
 
     // update lines on change of selectbox

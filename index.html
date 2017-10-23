@@ -32,14 +32,23 @@
   	  circle {
   	    opacity: 0.2;
   	  }
+	  circle#line1 {
+		fill: green;
+	  }
+	  circle#line2 {
+		fill: red;
+	  }
+	  circle#line3 {
+		fill: blue;
+	  }
       #line1 {
         stroke: green;
-		    color: green;
+		color: green;
         font-family: arial;
       }
       #line2 {
         stroke: red;
-		    color: red;
+		color: red;
         font-family: arial;
       }
   	  #line3 {
@@ -57,6 +66,9 @@
         stroke: green;
         stroke-width: 2px;
       }
+	  rect {
+	    fill: red
+	  }
 
     </style>
     <script type="text/javascript">  
@@ -264,12 +276,20 @@
       update_lines( 'Unemployment',3, '15 - 74 years', value, 'All');
       debugger;
     }
-		
+			
 		// from http://bl.ocks.org/jfreels/6734823 
-		var selectbox = d3.select('body').append('div')
-				.append('select')
-				.attr('class','select')
-				.on('change', sexchange);
+		var selectbox = d3.select('body')
+			.append('svg')
+			.attr("width", width + margin.left + margin.right)
+		    .attr("height", "60")
+		
+		selectbox.append('rect')
+			.attr("height", "40")
+			.attr("width", "80")
+		
+		selectbox.append('select')
+			.attr('class','select')
+			.on('change', sexchange);
 
 		var sex_options = ["Both", "Male", "Female"];
 

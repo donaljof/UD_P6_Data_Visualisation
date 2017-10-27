@@ -87,16 +87,13 @@
 		var margin = {top: 50, right: 100, bottom: 50, left: 100},
 		  width = 1000 - margin.left - margin.right,
 		  height = 500 - margin.top - margin.bottom;
-
-
-
+		  
 		var svg = d3.select("body")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		  .attr("height", height + margin.top + margin.bottom)
 		  .append('g')
 		  .attr('class', 'chart');
-
 
 		var year_extent = d3.extent(init_data, function(d) {
 		return d['Year'];
@@ -125,15 +122,15 @@
 		})
 
 		var y_r_scale = d3.scaleLinear()
-		  .domain(y_r_extent)
-		  .range([height, 0]);
+		    .domain(y_r_extent)
+		    .range([height, 0]);
 
 		var y_r_axis = d3.axisRight(y_r_scale)
-		.ticks(10);
+			.ticks(10);
 
 		// Add x axis
 		svg.append('g')
-		  .attr('class', 'x axis')
+		  .attr('class', 'x_axis')
 			  .attr("transform", "translate(" + margin.left +", "+ (height + margin.top) +")")
 		  .call(x_axis)
 			  .style("text-anchor", "middle")
@@ -141,7 +138,7 @@
 
 		// Add y axis
 		svg.append('g')
-		  .attr('class', 'y axis')
+		  .attr('class', 'y_axis')
 		  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 			  .call(y_axis)
 		  .append("text")
@@ -154,7 +151,7 @@
 
 		// add y axis on right hand side	  
 		svg.append('g')
-		  .attr('class', 'y r axis')
+		  .attr('class', 'y_r_axis')
 			  .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
 			.call(y_r_axis)
 		  .append("text")
@@ -172,8 +169,6 @@
 		var valueline_right = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_r_scale(d.Result); });
-		  
-		debugger;
 
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
@@ -240,6 +235,34 @@
 		var linename = 'g#line' + index
 
 		var line = svg.select(linename);
+		
+		//Extent and scale for y scales update
+		var y_extent = d3.extent(init_data, function(d) {
+		return d['Result'];
+		})
+
+		var y_scale = d3.scaleLinear()
+		  .domain(y_extent)
+		  .range([height, 0]);
+
+		var y_axis = d3.axisLeft(y_scale)
+		.ticks(10);
+
+		var y_r_extent = d3.extent(r_axis_data, function(d) {
+		return d['Result'];
+		})
+
+		var y_r_scale = d3.scaleLinear()
+		  .domain(y_r_extent)
+		  .range([height, 0]);
+
+		var y_r_axis = d3.axisRight(y_r_scale)
+			.ticks(10);
+		
+		d3.select('g.y_axis')
+			.call(y_axis);
+		debugger;
+		
 
 		//update path with new filtered data 
 		line.select('path')
@@ -264,44 +287,60 @@
     }
 
     // update lines on change of selectbox
-    function sexchange() {
-      var value = d3.select('select').property('value')
+    function plotchange() {
+      var sex = d3.select('div.sexchange').select('select').property('value')
+	  
+	  var nat = d3.select('div.natchange').select('select').property('value')
+	  
+	  var age = d3.select('div.agechange').select('select').property('value')
       
-      var filtered = data.filter(function(d) {
-                  return d['Sex'] === value;
-              }); 
-      
-      update_lines( 'Emmigration', 1, '15 - 74 years', value,'All');
-      update_lines( 'Immigration',2,'15 - 74 years', value, 'All');
-      update_lines( 'Unemployment',3, '15 - 74 years', value, 'All');
-      debugger;
+      update_lines( 'Emmigration', 1, age, sex, nat);
+      update_lines( 'Immigration',2,age, sex, nat);
+      update_lines( 'Unemployment',3, age, sex, nat);
+	  debugger;
     }
+		
+	// from http://bl.ocks.org/jfreels/6734823 
+	var selectboxSex = d3.select('div.sexchange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
+
+	var sex_options = ["Both", "Male", "Female"];
+
+	var options = selectboxSex.selectAll('option')
+		.data(sex_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
 			
-		// from http://bl.ocks.org/jfreels/6734823 
-		var selectbox = d3.select('body')
-			.append('svg')
-			.attr("width", width + margin.left + margin.right)
-		    .attr("height", "60")
+	//Same as above for Age Groupings
+	var selectboxAge = d3.select('div.agechange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
+
+	var age_options = ["15 - 74 years", "15 - 24 years", "25 - 74 years"];
+
+	var options = selectboxAge.selectAll('option')
+		.data(age_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
+
+	//Same as above for Nationality
+	var selectboxNat = d3.select('div.natchange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
+
+	var nat_options = ["All", "Irish", "UK", "EU15", "EU28", "Other"];
+
+	var options = selectboxNat.selectAll('option')
+		.data(nat_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
+
 		
-		selectbox.append('rect')
-			.attr("height", "40")
-			.attr("width", "80")
 		
-		selectbox.append('select')
-			.attr('class','select')
-			.on('change', sexchange);
-
-		var sex_options = ["Both", "Male", "Female"];
-
-		var options = selectbox.selectAll('option')
-			.data(sex_options).enter()
-			.append('option')
-			.text(function (d) { return d; });
-
-
-		
-		
-
     }; /* draw_chart END */
 	
 	function update_data(sex) {
@@ -332,6 +371,15 @@
   </script>
 <h1>Economic Recession and its Impact on Immigration and Emigration in Ireland (2006 - 2016)</h1>
 <h2>Data Visualisation Project - Donal O Farrell</h2>
+<div class = 'sexchange'>
+	<h3>Select Sex: </h3>
+</div>
+<div class = 'natchange'>
+	<h3>Select Nationality (Emmigration/Emmigration): </h3>
+</div>
+<div class = 'agechange'>
+	<h3>Select Age Grouping (Unemployment): </h3>
+</div>
 
 </body>
 </html>

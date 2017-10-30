@@ -25,4 +25,14 @@ The initial unemployement data was first filtered to match the migration dataset
 Following the summarization a similar approach to the migration data of header renaming, gathering and splitting was used. Finally both all three seperate data frames were
 merged together and exported as a .csv file for use in the visualization.
 
+# Design
 
+# Feedback
+
+# Resources#
+
+a README.md file that includes four sections...
+Summary - in no more than 4 sentences, briefly introduce your data visualization and add any context that can help readers understand it
+Design - explain any design choices you made including changes to the visualization after collecting feedback
+Feedback - include all feedback you received from others on your visualization from the first sketch to the final visualization
+Resources - list any sources you consulted to create your visualization

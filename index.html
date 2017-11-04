@@ -81,6 +81,8 @@
 		// Function to filter data down to selected Sex / nationality
 		var init_data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage') });
 
+		var y_axis_data = data.filter(function(d) { return d['Sex'] === 'Both' && d['Nationality'] === 'All'});
+
 		var r_axis_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] == '15 - 74 years' && d['Nationality'] === 'Percentage' });
 
 
@@ -96,7 +98,7 @@
 		  .attr('class', 'chart');
 
 		var year_extent = d3.extent(init_data, function(d) {
-		return d['Year'];
+			return d['Year'];
 		})
 
 		var x_scale = d3.scaleTime()
@@ -105,8 +107,8 @@
 
 		var x_axis = d3.axisBottom(x_scale);
 
-		var y_extent = d3.extent(init_data, function(d) {
-		return d['Result'];
+		var y_extent = d3.extent(y_axis_data, function(d) {
+			return d['Result'];
 		})
 
 		var y_scale = d3.scaleLinear()
@@ -114,7 +116,7 @@
 		  .range([height, 0]);
 
 		var y_axis = d3.axisLeft(y_scale)
-		.ticks(10);
+			.ticks(10);
 
 		// Second y axis on right of graph	
 		var y_r_extent = d3.extent(r_axis_data, function(d) {
@@ -152,7 +154,7 @@
 		// add y axis on right hand side	  
 		svg.append('g')
 		  .attr('class', 'y_r_axis')
-			  .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
 			.call(y_r_axis)
 		  .append("text")
 		  .attr("fill", "#000")
@@ -169,6 +171,8 @@
 		var valueline_right = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_r_scale(d.Result); });
+
+		debugger;
 
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
@@ -231,13 +235,17 @@
 		  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
 		} })
 
+		var y_axis_data = data.filter(function(d) { return d['Sex'] === sex && d['Nationality'] === nationality});
+
+		var r_axis_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === age_group && d['Nationality'] === 'Percentage' && d['Sex'] === sex});
+
 		//line id for correct selection
 		var linename = 'g#line' + index
 
 		var line = svg.select(linename);
 		
 		//Extent and scale for y scales update
-		var y_extent = d3.extent(init_data, function(d) {
+		var y_extent = d3.extent(y_axis_data, function(d) {
 		return d['Result'];
 		})
 
@@ -246,7 +254,7 @@
 		  .range([height, 0]);
 
 		var y_axis = d3.axisLeft(y_scale)
-		.ticks(10);
+			.ticks(10);
 
 		var y_r_extent = d3.extent(r_axis_data, function(d) {
 		return d['Result'];
@@ -260,9 +268,20 @@
 			.ticks(10);
 		
 		d3.select('g.y_axis')
-			.call(y_axis);
+			.call(y_axis)
 		debugger;
 		
+		d3.select('g.y_r_axis')
+			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+			.call(y_r_axis);
+
+		var valueline = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_scale(d.Result); });
+
+		var valueline_right = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_r_scale(d.Result); });
 
 		//update path with new filtered data 
 		line.select('path')

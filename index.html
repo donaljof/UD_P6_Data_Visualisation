@@ -295,6 +295,10 @@
 			  return valueline(line_data)
 			  }});
 
+		var t = d3.transition()
+		    .duration(750)
+		    .ease(d3.easeLinear);
+
 		//select circle elements of line x <g>, connect to filtered data and update y
 		var circles = line.selectAll("circle")
 			.data(line_data)

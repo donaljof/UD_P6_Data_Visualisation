@@ -4,71 +4,83 @@
  <script src="d3/d3.js"></script>
     <style>
 
-      h1 {
-        text-align: center;
-        color: black;
-        font-family: sans-serif;
-        font-variant: arial;
-        font-size: 10;
-      }
+	h1 {
+		text-align: center;
+		color: black;
+		font-family: sans-serif;
+		font-variant: arial;
+		font-size: 10;
+	}
 
-      h2 {
-        text-align: center;
-        color: blue;
-        font-style: italic;
-      }
+	h2 {
+		text-align: center;
+		color: blue;
+		font-style: italic;
+	}
 
-      .axis {
-        font-family: arial;
-        font-size: 0.6em;
-      }
-      .path {
-        fill: none;
-        stroke-width: 2px;        }
-      .tick {
-        fill: none;
-        stroke: black;
-      }
-  	  circle {
-  	    opacity: 0.2;
-  	  }
-	  circle#line1 {
+	.axis {
+		font-family: arial;
+		font-size: 0.6em;
+	}
+	.path {
+		fill: none;
+		stroke-width: 2px;        }
+	.tick {
+		fill: none;
+		stroke: black;
+	}
+	  circle {
+	    opacity: 0.2;
+	  }
+	circle#line1 {
 		fill: green;
-	  }
-	  circle#line2 {
+	}
+	circle#line2 {
 		fill: red;
-	  }
-	  circle#line3 {
+	}
+	circle#line3 {
 		fill: blue;
-	  }
-      #line1 {
-        stroke: green;
+	}
+	#line1 {
+		stroke: green;
 		color: green;
-        font-family: arial;
-      }
-      #line2 {
-        stroke: red;
+		font-family: arial;
+	}
+	#line2 {
+		stroke: red;
 		color: red;
-        font-family: arial;
-      }
-  	  #line3 {
-        stroke: blue;
-        color: blue;
-        font-family: arial;
-      }
-      .line_plot {
-        fill: none;
-        stroke: #4eb0bb;
-        stroke-width: 1px;
-      }
-      .line {
-        fill: none;
-        stroke: green;
-        stroke-width: 2px;
-      }
-	  rect {
-	    fill: red
-	  }
+		font-family: arial;
+	}
+	  #line3 {
+		stroke: blue;
+		color: blue;
+		font-family: arial;
+	}
+	.line_plot {
+		fill: none;
+		stroke: #4eb0bb;
+		stroke-width: 1px;
+	}
+	.line {
+		fill: none;
+		stroke: green;
+		stroke-width: 2px;
+	}
+	rect {
+	
+	}
+	div.tooltip {	
+	    position: absolute;			
+	    text-align: center;			
+	    width: 150px;					
+	    height: 28px;					
+	    padding: 2px;				
+	    font: 12px arial;		
+	    background: yellow;	
+	    border: 0px;		
+	    border-radius: 8px;			
+	    pointer-events: none;			
+	}
 
     </style>
     <script type="text/javascript">  
@@ -87,15 +99,21 @@
 
 
 		var margin = {top: 50, right: 100, bottom: 50, left: 100},
-		  width = 1000 - margin.left - margin.right,
-		  height = 500 - margin.top - margin.bottom;
+			width = 1000 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom;
 		  
+		//tooltip div for pop up info box's
+		var div = d3.select("body").append("div")	
+		    .attr("class", "tooltip")				
+		    .style("opacity", 0);
+		debugger;
+
 		var svg = d3.select("body")
-		.append("svg")
-		.attr("width", width + margin.left + margin.right)
-		  .attr("height", height + margin.top + margin.bottom)
-		  .append('g')
-		  .attr('class', 'chart');
+			.append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+			.append('g')
+			.attr('class', 'chart');
 
 		var year_extent = d3.extent(init_data, function(d) {
 			return d['Year'];
@@ -164,6 +182,8 @@
 		  .attr("text-anchor", "end")
 		  .text("% Unempolyment");
 
+
+		//Value lines for plotted line generation
 		var valueline = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_scale(d.Result); });
@@ -172,37 +192,56 @@
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_r_scale(d.Result); });
 
-		debugger;
-
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
 
+			//for each layer of lines, add a line with id same as index
 			var line = svg.append('g')
-        .attr("id", "line" + index);
+        		.attr("id", "line" + index);
 
 			var label_offset = 20 * index
 
+			//filter data with initial conditions
 			var line_data = data.filter(function(d) { if (header === 'Unemployment') {
 				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && d['Nationality'] === 'Percentage';
 				}else{ 
 				  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === 'All';
-				} })
+				} });
 
+			//adding key
 			line.append("text")
 				.text(header)
 				.attr("transform", "translate(" + 750 + ", " + (margin.top + label_offset) + ")")
 				.attr("id", "line" + index);
-
+			//adding line
 			line.append('path')
 				.attr("class", "line")
 				.attr("id", "line" + index)
 				.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 				.attr("d", function(d) {
-				  if (header === 'Unemployment') {
+				  if(header === 'Unemployment') {
 					return valueline_right(line_data)
 				  }else{
 					return valueline(line_data)
 				  }});
+			//format for year and function to create toottip box's
+			var formatYear = d3.timeFormat("%Y")
+
+			var tooltip = function(d) {		
+					div.transition()		
+					    .duration(200)		
+					    .style("opacity", .7);
+					if(header === 'Unemployment') {
+						div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + d.Result + "%")
+							.style("left", (d3.event.pageX) + "px")		
+	                		.style("top", (d3.event.pageY - 28) + "px");
+	                }else{
+	                	div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + (d.Result * 1000))
+							.style("left", (d3.event.pageX) + "px")		
+	                		.style("top", (d3.event.pageY - 28) + "px");
+
+	                }
+				}
 
 
 			line.selectAll("circle")
@@ -217,7 +256,10 @@
 					  return y_r_scale(d.Result)
 					}else{
 					  return y_scale(d.Result)
-					}});
+					}})
+				  .on("mouseover", function(d) {
+				  	return tooltip(d);
+				  });
 		}; //plot_lines END
 
 		plot_lines( 'Emmigration', 1, 'Both');
@@ -269,7 +311,6 @@
 		
 		d3.select('g.y_axis')
 			.call(y_axis)
-		debugger;
 		
 		d3.select('g.y_r_axis')
 			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
@@ -320,7 +361,6 @@
       update_lines( 'Emmigration', 1, age, sex, nat);
       update_lines( 'Immigration',2,age, sex, nat);
       update_lines( 'Unemployment',3, age, sex, nat);
-	  debugger;
     }
 		
 	// from http://bl.ocks.org/jfreels/6734823 

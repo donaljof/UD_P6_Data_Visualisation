@@ -2,87 +2,7 @@
 <html>
 <head>
  <script src="d3/d3.js"></script>
-    <style>
-
-	h1 {
-		text-align: center;
-		color: black;
-		font-family: sans-serif;
-		font-variant: arial;
-		font-size: 10;
-	}
-
-	h2 {
-		text-align: center;
-		color: blue;
-		font-style: italic;
-	}
-
-	.axis {
-		font-family: arial;
-		font-size: 0.6em;
-	}
-	.path {
-		fill: none;
-		stroke-width: 2px;        }
-	.tick {
-		fill: none;
-		stroke: black;
-	}
-	  circle {
-	    opacity: 0.2;
-	  }
-	circle#line1 {
-		fill: green;
-	}
-	circle#line2 {
-		fill: red;
-	}
-	circle#line3 {
-		fill: blue;
-	}
-	#line1 {
-		stroke: green;
-		color: green;
-		font-family: arial;
-	}
-	#line2 {
-		stroke: red;
-		color: red;
-		font-family: arial;
-	}
-	  #line3 {
-		stroke: blue;
-		color: blue;
-		font-family: arial;
-	}
-	.line_plot {
-		fill: none;
-		stroke: #4eb0bb;
-		stroke-width: 1px;
-	}
-	.line {
-		fill: none;
-		stroke: green;
-		stroke-width: 2px;
-	}
-	rect {
-	
-	}
-	div.tooltip {	
-	    position: absolute;			
-	    text-align: center;			
-	    width: 150px;					
-	    height: 28px;					
-	    padding: 2px;				
-	    font: 12px arial;		
-	    background: yellow;	
-	    border: 0px;		
-	    border-radius: 8px;			
-	    pointer-events: none;			
-	}
-
-    </style>
+ <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <script type="text/javascript">  
     /* insert js here! */
 	
@@ -233,11 +153,11 @@
 					    .style("opacity", .7);
 					if(header === 'Unemployment') {
 						div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + d.Result + "%")
-							.style("left", (d3.event.pageX) + "px")		
+							.style("left", (d3.event.pageX + 10) + "px")		
 	                		.style("top", (d3.event.pageY - 28) + "px");
 	                }else{
 	                	div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + (d.Result * 1000))
-							.style("left", (d3.event.pageX) + "px")		
+							.style("left", (d3.event.pageX + 10) + "px")		
 	                		.style("top", (d3.event.pageY - 28) + "px");
 
 	                }
@@ -249,7 +169,7 @@
 				.enter()
 				.append("circle")
 				  .attr("id", "line" + index)
-				  .attr("r", 6)
+				  .attr("r", 4)
 				  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 				  .attr("cx", function(d) { return x_scale(d.Year); })
 				  .attr("cy", function(d) { if (header === 'Unemployment') {
@@ -432,17 +352,21 @@
   main()
 
   </script>
-<h1>Economic Recession and its Impact on Immigration and Emigration in Ireland (2006 - 2016)</h1>
+<h1>Immigration and Emigration in Ireland (2006 - 2016)</h1>
 <h2>Data Visualisation Project - Donal O Farrell</h2>
 <div class = 'sexchange'>
-	<h3>Select Sex: </h3>
+	<h3>Filter Sex: </h3>
 </div>
 <div class = 'natchange'>
-	<h3>Select Nationality (Emmigration/Emmigration): </h3>
+	<h3>Filter Nationality (Emmigration/Emmigration): </h3>
 </div>
 <div class = 'agechange'>
-	<h3>Select Age Grouping (Unemployment): </h3>
+	<h3>Filter Age Grouping (Unemployment): </h3>
 </div>
-
+<div class = 'info'>
+	<p>EU15 refers to European Union member states other than Ireland and the UK up to and including the 1995 enlargement of the EU.</p>
+	<p>EU28 refers to all EU member states added since 1995 and so includes Bulgaria and Romania (2007) and Croatia (2013)</p>
+    <p>Other refers to all other countries  outside of the current EU, UK and Republic of Ireland</p>
+</div>
 </body>
 </html>

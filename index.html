@@ -2,63 +2,7 @@
 <html>
 <head>
  <script src="d3/d3.js"></script>
-    <style>
-
-      h1 {
-        text-align: center;
-        color: black;
-        font-family: sans-serif;
-        font-variant: arial;
-        font-size: 10;
-      }
-
-      h2 {
-        text-align: center;
-        color: blue;
-        font-style: italic;
-      }
-
-      .axis {
-        font-family: arial;
-        font-size: 0.6em;
-      }
-      .path {
-        fill: none;
-        stroke-width: 2px;        }
-      .tick {
-        fill: none;
-        stroke: black;
-      }
-  	  circle {
-  	    opacity: 0.2;
-  	  }
-      #line1 {
-        stroke: green;
-		    color: green;
-        font-family: arial;
-      }
-      #line2 {
-        stroke: red;
-		    color: red;
-        font-family: arial;
-      }
-  	  #line3 {
-        stroke: blue;
-        color: blue;
-        font-family: arial;
-      }
-      .line_plot {
-        fill: none;
-        stroke: #4eb0bb;
-        stroke-width: 1px;
-      }
-      .line {
-        fill: none;
-        stroke: green;
-        stroke-width: 2px;
-      }
-
-    </style>
+ <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <script type="text/javascript">  
     /* insert js here! */
 	
@@ -69,25 +13,30 @@
 		// Function to filter data down to selected Sex / nationality
 		var init_data = data.filter(function(d) { return d['Sex'] === 'Both' && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage') });
 
-		var r_axis_data = init_data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === '15 - 74 years'  });
+		var y_axis_data = data.filter(function(d) { return d['Sex'] === 'Both' && d['Nationality'] === 'All'});
+
+		var r_axis_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] == '15 - 74 years' && d['Nationality'] === 'Percentage' });
 
 
 		var margin = {top: 50, right: 100, bottom: 50, left: 100},
-		  width = 1000 - margin.left - margin.right,
-		  height = 500 - margin.top - margin.bottom;
-
-
+			width = 1000 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom;
+		  
+		//tooltip div for pop up info box's
+		var div = d3.select("body").append("div")	
+		    .attr("class", "tooltip")				
+		    .style("opacity", 0);
+		debugger;
 
 		var svg = d3.select("body")
-		.append("svg")
-		.attr("width", width + margin.left + margin.right)
-		  .attr("height", height + margin.top + margin.bottom)
-		  .append('g')
-		  .attr('class', 'chart');
-
+			.append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+			.append('g')
+			.attr('class', 'chart');
 
 		var year_extent = d3.extent(init_data, function(d) {
-		return d['Year'];
+			return d['Year'];
 		})
 
 		var x_scale = d3.scaleTime()
@@ -96,8 +45,8 @@
 
 		var x_axis = d3.axisBottom(x_scale);
 
-		var y_extent = d3.extent(init_data, function(d) {
-		return d['Result'];
+		var y_extent = d3.extent(y_axis_data, function(d) {
+			return d['Result'];
 		})
 
 		var y_scale = d3.scaleLinear()
@@ -105,7 +54,7 @@
 		  .range([height, 0]);
 
 		var y_axis = d3.axisLeft(y_scale)
-		.ticks(10);
+			.ticks(10);
 
 		// Second y axis on right of graph	
 		var y_r_extent = d3.extent(r_axis_data, function(d) {
@@ -113,15 +62,15 @@
 		})
 
 		var y_r_scale = d3.scaleLinear()
-		  .domain(y_r_extent)
-		  .range([height, 0]);
+		    .domain(y_r_extent)
+		    .range([height, 0]);
 
 		var y_r_axis = d3.axisRight(y_r_scale)
-		.ticks(10);
+			.ticks(10);
 
 		// Add x axis
 		svg.append('g')
-		  .attr('class', 'x axis')
+		  .attr('class', 'x_axis')
 			  .attr("transform", "translate(" + margin.left +", "+ (height + margin.top) +")")
 		  .call(x_axis)
 			  .style("text-anchor", "middle")
@@ -129,7 +78,7 @@
 
 		// Add y axis
 		svg.append('g')
-		  .attr('class', 'y axis')
+		  .attr('class', 'y_axis')
 		  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 			  .call(y_axis)
 		  .append("text")
@@ -142,8 +91,8 @@
 
 		// add y axis on right hand side	  
 		svg.append('g')
-		  .attr('class', 'y r axis')
-			  .attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+		  .attr('class', 'y_r_axis')
+			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
 			.call(y_r_axis)
 		  .append("text")
 		  .attr("fill", "#000")
@@ -151,8 +100,10 @@
 		  .attr("y", -12)
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "end")
-		  .text("% Unemplyment");
+		  .text("% Unempolyment");
 
+
+		//Value lines for plotted line generation
 		var valueline = d3.line()
 		  .x(function(d) { return x_scale(d.Year); })
 		  .y(function(d) { return y_scale(d.Result); });
@@ -164,32 +115,53 @@
 		//Function to gerate line for each 
 		var plot_lines = function(header, index, sex) {
 
+			//for each layer of lines, add a line with id same as index
 			var line = svg.append('g')
-        .attr("id", "line" + index);
+        		.attr("id", "line" + index);
 
 			var label_offset = 20 * index
 
+			//filter data with initial conditions
 			var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+				  return d['Header'] === header && d['Age.Group'] === '15 - 74 years' && d['Sex'] === sex && d['Nationality'] === 'Percentage';
 				}else{ 
-				  return d['Header'] === header && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
-				} })
+				  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === 'All';
+				} });
 
+			//adding key
 			line.append("text")
 				.text(header)
 				.attr("transform", "translate(" + 750 + ", " + (margin.top + label_offset) + ")")
 				.attr("id", "line" + index);
-
+			//adding line
 			line.append('path')
 				.attr("class", "line")
 				.attr("id", "line" + index)
 				.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 				.attr("d", function(d) {
-				  if (header === 'Unemployment') {
+				  if(header === 'Unemployment') {
 					return valueline_right(line_data)
 				  }else{
 					return valueline(line_data)
 				  }});
+			//format for year and function to create toottip box's
+			var formatYear = d3.timeFormat("%Y")
+
+			var tooltip = function(d) {		
+					div.transition()		
+					    .duration(200)		
+					    .style("opacity", .7);
+					if(header === 'Unemployment') {
+						div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + d.Result + "%")
+							.style("left", (d3.event.pageX + 10) + "px")		
+	                		.style("top", (d3.event.pageY - 28) + "px");
+	                }else{
+	                	div.html("Year: " + formatYear(d.Year) + "<br/>"  + header + ": " + (d.Result * 1000))
+							.style("left", (d3.event.pageX + 10) + "px")		
+	                		.style("top", (d3.event.pageY - 28) + "px");
+
+	                }
+				}
 
 
 			line.selectAll("circle")
@@ -197,14 +169,17 @@
 				.enter()
 				.append("circle")
 				  .attr("id", "line" + index)
-				  .attr("r", 6)
+				  .attr("r", 4)
 				  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
 				  .attr("cx", function(d) { return x_scale(d.Year); })
 				  .attr("cy", function(d) { if (header === 'Unemployment') {
 					  return y_r_scale(d.Result)
 					}else{
 					  return y_scale(d.Result)
-					}});
+					}})
+				  .on("mouseover", function(d) {
+				  	return tooltip(d);
+				  });
 		}; //plot_lines END
 
 		plot_lines( 'Emmigration', 1, 'Both');
@@ -215,87 +190,140 @@
 
     function update_lines(header, index, age_group, sex, nationality) {
 
-      //data for graph, now filtered bu update entered as part of funtion
-      var line_data = data.filter(function(d) { if (header === 'Unemployment') {
-          return d['Header'] === header && d['Age.Group'] === age_group && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
-        }else{ 
-          return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
-        } })
+		//data for graph, now filtered bu update entered as part of funtion
+		var line_data = data.filter(function(d) { if (header === 'Unemployment') {
+		  return d['Header'] === header && d['Age.Group'] === age_group && d['Sex'] === sex && ( d['Nationality'] === 'All' || d['Nationality'] === 'Percentage');
+		}else{ 
+		  return d['Header'] === header && d['Sex'] === sex && d['Nationality'] === nationality;
+		} })
 
-      //line id for correct selection
-       var linename = 'g#line' + index
+		var y_axis_data = data.filter(function(d) { return d['Sex'] === sex && d['Nationality'] === nationality});
 
-      var line = svg.select(linename);
+		var r_axis_data = data.filter(function(d) { return d['Header'] === 'Unemployment' && d['Age.Group'] === age_group && d['Nationality'] === 'Percentage' && d['Sex'] === sex});
 
-      //update path with new filtered data 
-      line.select('path')
-        .attr("class", "line")
-        .attr("id", "line" + index)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("d", function(d) {
-          if (header === 'Unemployment') {
-          return valueline_right(line_data)
-          }else{
-          return valueline(line_data)
-          }});
+		//line id for correct selection
+		var linename = 'g#line' + index
 
-      debugger;
+		var line = svg.select(linename);
+		
+		//Extent and scale for y scales update
+		var y_extent = d3.extent(y_axis_data, function(d) {
+		return d['Result'];
+		})
 
-      //select circle elements of line x <g> and connect filtered data
-      var circles = line.selectAll("circle")
-        .data(line_data);
+		var y_scale = d3.scaleLinear()
+		  .domain(y_extent)
+		  .range([height, 0]);
 
-      debugger;
-      //remove old circles
-      circles.exit().remove();
+		var y_axis = d3.axisLeft(y_scale)
+			.ticks(10);
 
-      //add new circles based on current data
-      circles.enter()
-        .append("circle")
-        .attr("id", "line" + index)
-        .attr("r", 6)
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
-        .attr("cx", function(d) { return x_scale(d.Year); })
-        .attr("cy", function(d) { if (header === 'Unemployment') {
-          return y_r_scale(d.Result)
-        }else{
-          return y_scale(d.Result)
-        }});
+		var y_r_extent = d3.extent(r_axis_data, function(d) {
+		return d['Result'];
+		})
 
-        debugger;
+		var y_r_scale = d3.scaleLinear()
+		  .domain(y_r_extent)
+		  .range([height, 0]);
+
+		var y_r_axis = d3.axisRight(y_r_scale)
+			.ticks(10);
+		
+		d3.select('g.y_axis')
+			.call(y_axis)
+		
+		d3.select('g.y_r_axis')
+			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+			.call(y_r_axis);
+
+		var valueline = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_scale(d.Result); });
+
+		var valueline_right = d3.line()
+		  .x(function(d) { return x_scale(d.Year); })
+		  .y(function(d) { return y_r_scale(d.Result); });
+
+		//update path with new filtered data 
+		line.select('path')
+			.attr("class", "line")
+			.attr("id", "line" + index)
+			.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+			.attr("d", function(d) {
+			  if (header === 'Unemployment') {
+			  return valueline_right(line_data)
+			  }else{
+			  return valueline(line_data)
+			  }});
+
+		var t = d3.transition()
+		    .duration(750)
+		    .ease(d3.easeLinear);
+
+		//select circle elements of line x <g>, connect to filtered data and update y
+		var circles = line.selectAll("circle")
+			.data(line_data)
+			.attr("cy", function(d) { if (header === 'Unemployment') {
+			  return y_r_scale(d.Result)
+			}else{
+			  return y_scale(d.Result)
+			}});
     }
 
     // update lines on change of selectbox
-    function sexchange() {
-      var value = d3.select('select').property('value')
+    function plotchange() {
+      var sex = d3.select('div.sexchange').select('select').property('value')
+	  
+	  var nat = d3.select('div.natchange').select('select').property('value')
+	  
+	  var age = d3.select('div.agechange').select('select').property('value')
       
-      var filtered = data.filter(function(d) {
-                  return d['Sex'] === value;
-              }); 
-      
-      update_lines( 'Emmigration', 1, '15 - 74 years', value,'All');
-      update_lines( 'Immigration',2,'15 - 74 years', value, 'All');
-      update_lines( 'Unemployment',3, '15 - 74 years', value, 'All');
-      debugger;
+      update_lines( 'Emmigration', 1, age, sex, nat);
+      update_lines( 'Immigration',2,age, sex, nat);
+      update_lines( 'Unemployment',3, age, sex, nat);
     }
 		
-		// from http://bl.ocks.org/jfreels/6734823 
-		var selectbox = d3.select('body').append('div')
-				.append('select')
-				.attr('class','select')
-				.on('change', sexchange);
+	// from http://bl.ocks.org/jfreels/6734823 
+	var selectboxSex = d3.select('div.sexchange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
 
-		var sex_options = ["Both", "Male", "Female"];
+	var sex_options = ["Both", "Male", "Female"];
 
-		var options = selectbox.selectAll('option')
-			.data(sex_options).enter()
-			.append('option')
-			.text(function (d) { return d; });
+	var options = selectboxSex.selectAll('option')
+		.data(sex_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
+			
+	//Same as above for Age Groupings
+	var selectboxAge = d3.select('div.agechange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
 
+	var age_options = ["15 - 74 years", "15 - 24 years", "25 - 74 years"];
+
+	var options = selectboxAge.selectAll('option')
+		.data(age_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
+
+	//Same as above for Nationality
+	var selectboxNat = d3.select('div.natchange')
+		.append('select')
+		.attr('class','select')
+		.on('change', plotchange);
+
+	var nat_options = ["All", "Irish", "UK", "EU15", "EU28", "Other"];
+
+	var options = selectboxNat.selectAll('option')
+		.data(nat_options).enter()
+		.append('option')
+		.text(function (d) { return d; });
 
 		
 		
-
     }; /* draw_chart END */
 	
 	function update_data(sex) {
@@ -324,8 +352,21 @@
   main()
 
   </script>
-<h1>Economic Recession and its Impact on Immigration and Emigration in Ireland (2006 - 2016)</h1>
+<h1>Immigration and Emigration in Ireland (2006 - 2016)</h1>
 <h2>Data Visualisation Project - Donal O Farrell</h2>
-
+<div class = 'sexchange'>
+	<h3>Filter Sex: </h3>
+</div>
+<div class = 'natchange'>
+	<h3>Filter Nationality (Emmigration/Emmigration): </h3>
+</div>
+<div class = 'agechange'>
+	<h3>Filter Age Grouping (Unemployment): </h3>
+</div>
+<div class = 'info'>
+	<p>EU15 refers to European Union member states other than Ireland and the UK up to and including the 1995 enlargement of the EU.</p>
+	<p>EU28 refers to all EU member states added since 1995 and so includes Bulgaria and Romania (2007) and Croatia (2013)</p>
+    <p>Other refers to all other countries  outside of the current EU, UK and Republic of Ireland</p>
+</div>
 </body>
 </html>

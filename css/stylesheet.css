@@ -43,25 +43,34 @@
 	    opacity: 0.2;
 	  }
 	circle#line1 {
-		fill: #AA5B51;
+		fill: #E52C2C;
 	}
 	circle#line2 {
-		fill: #38B6B1;
+		fill: #6CDC20;
 	}
 	circle#line3 {
-		fill: #DBD55C;
+		fill: #1074E6;
 	}
 	#line1 {
-		stroke: #AA5B51;
+		stroke: #E52C2C;
 		font-family: arial;
 	}
 	#line2 {
-		stroke: #38B6B1;
+		stroke: #6CDC20;
 		font-family: arial;
 	}
 	#line3 {
-		stroke: #DBD55C;
+		stroke: #1074E6;
 		font-family: arial;
+	}
+	text#line1 {
+		fill: #E52C2C;
+	}
+	text#line2 {
+		fill: #6CDC20;
+	}
+	text#line3 {
+		fill: #1074E6;
 	}
 	.line_plot {
 		fill: none;

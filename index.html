@@ -26,7 +26,6 @@
 		var div = d3.select("body").append("div")	
 		    .attr("class", "tooltip")				
 		    .style("opacity", 0);
-		debugger;
 
 		var svg = d3.select("body")
 			.append("svg")
@@ -230,10 +229,15 @@
 			.ticks(10);
 		
 		d3.select('g.y_axis')
-			.call(y_axis)
+			.transition()
+			.duration(1500)
+			.delay(1500)
+			.call(y_axis);
 		
 		d3.select('g.y_r_axis')
-			.attr("transform", "translate(" + (width + margin.left) + ", " + margin.top + ")")
+		  .transition()
+			.duration(1500)
+			.delay(1500)
 			.call(y_r_axis);
 
 		var valueline = d3.line()
@@ -246,6 +250,8 @@
 
 		//update path with new filtered data 
 		line.select('path')
+			.transition()
+			.duration(1500)
 			.attr("class", "line")
 			.attr("id", "line" + index)
 			.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
@@ -256,13 +262,11 @@
 			  return valueline(line_data)
 			  }});
 
-		var t = d3.transition()
-		    .duration(750)
-		    .ease(d3.easeLinear);
-
 		//select circle elements of line x <g>, connect to filtered data and update y
 		var circles = line.selectAll("circle")
 			.data(line_data)
+			.transition()
+			.duration(1500)
 			.attr("cy", function(d) { if (header === 'Unemployment') {
 			  return y_r_scale(d.Result)
 			}else{
@@ -290,7 +294,7 @@
 		.on('change', plotchange);
 
 	var sex_options = ["Both", "Male", "Female"];
-
+	//adding the optin
 	var options = selectboxSex.selectAll('option')
 		.data(sex_options).enter()
 		.append('option')
@@ -324,15 +328,9 @@
 
 		
 		
-    }; /* draw_chart END */
-	
-	function update_data(sex) {
-		var new_path = d3.select(path)
-	
-	}
-
+    };
+    //load csv, format data and run plotting function
     function main() {
-
 		var formatYear = d3.timeParse("%Y");
 
 		d3.csv("data/combined_data.csv", function(d) {
@@ -365,8 +363,8 @@
 </div>
 <div class = 'info'>
 	<p>EU15 refers to European Union member states other than Ireland and the UK up to and including the 1995 enlargement of the EU.</p>
-	<p>EU28 refers to all EU member states added since 1995 and so includes Bulgaria and Romania (2007) and Croatia (2013)</p>
-    <p>Other refers to all other countries  outside of the current EU, UK and Republic of Ireland</p>
+	<p>EU28 refers to all EU member states added since 1995 and includes Bulgaria and Romania (2007) and Croatia (2013)</p>
+    <p>Other refers to all other countries outside of the current EU, UK and Republic of Ireland</p>
 </div>
 </body>
 </html>

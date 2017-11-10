@@ -15,9 +15,6 @@ IM$EU15.excluding.Irish.and.UK <- as.numeric(IM$EU15.excluding.Irish.and.UK)
 IM$EU15.to.EU28.states.male <- as.numeric(IM$EU15.to.EU28.states.male)
 IM$EU15.to.EU28.states.female <- as.numeric(IM$EU15.to.EU28.states.female)
 
-ggplot(IM, aes(x = IM$X, y = IM$All_nationalities)) +
-  geom_line()
-
 IM <- subset(IM, IM$Year >= 2006)
 
 EM <- read.csv("data/Emmigration.csv",stringsAsFactors=FALSE, header = TRUE)
@@ -25,8 +22,9 @@ EM <- read.csv("data/Emmigration.csv",stringsAsFactors=FALSE, header = TRUE)
 colnames(EM)[1] <- "Year"
 unique(EM$Year)
 
-ggplot(EM, aes(x  = Year, y = Irish)) +
+ggplot(subset(EM, EM$header =="Emmigration All Both"), aes(x  = Year, y = Result)) +
   geom_line()
+ggsave("R_line_chart.jpg")
 
 UN <- read.csv("data/Monthly_employment.csv",stringsAsFactors=FALSE, header = TRUE)
 

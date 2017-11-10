@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
- <script src="d3/d3.js"></script>
- <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    <script type="text/javascript">  
+  <script src="d3/d3.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <script type="text/javascript">
     /* insert js here! */
-	
     function draw_chart(data) {
+
+      } //update_lines END
+
+      // update lines on change of selectbox
+      function plotchange() {
+
+        var sex = d3.select('div.sexchange').select('select').property('value');
+
+        var nat = d3.select('div.natchange').select('select').property('value');
+
+        var age = d3.select('div.agechange').select('select').property('value');
+      
+        update_lines( 'Emmigration', 1, age, sex, nat);
+        update_lines( 'Immigration',2,age, sex, nat);
+        update_lines( 'Unemployment',3, age, sex, nat);
+      }
+
+      // from http://bl.ocks.org/jfreels/6734823 
+      var selectboxSex = d3.select('div.sexchange')
+        .append('select')
+        .attr('class','select')
+        .on('change', plotchange);
+
+      var sex_options = ["Both", "Male", "Female"];
+
+      var options = selectboxSex.selectAll('option')
+        .data(sex_options).enter()
+        .append('option')
+        .text(function (d) { return d; });
+
+      //Same as above for Age Groupings
+      var selectboxAge = d3.select('div.agechange')
+        .append('select')
+        .attr('class','select')
+        .on('change', plotchange);
+
+      var age_options = ["15 - 74 years", "15 - 24 years", "25 - 74 years"];
+
+      var options = selectboxAge.selectAll('option')
+        .data(age_options).enter()
+        .append('option')
+        .text(function (d) { return d; });
+
+      //Same as above for Nationality
+      var selectboxNat = d3.select('div.natchange')
+        .append('select')
+        .attr('class','select')
+        .on('change', plotchange);
+
+      var nat_options = ["All", "Irish", "UK", "EU15", "EU28", "Other"];
+
+      var options = selectboxNat.selectAll('option')
+        .data(nat_options).enter()
+        .append('option')
+        .text(function (d) { return d; });
+    }; /* draw_chart END */
+
+    function main() {
+      var formatYear = d3.timeParse("%Y");
+
+      d3.csv("data/combined_data.csv", function(d) {
+        d.Year = formatYear(d.Year);
+        d.Result = +d.Result;
+        return d;
+      }, draw_chart);
+      
 		/* main charting function using d3.js */
 		// "use strict";
 
@@ -273,72 +338,6 @@
 			  return y_scale(d.Result)
 			}});
     }
-
-    // update lines on change of selectbox
-    function plotchange() {
-      var sex = d3.select('div.sexchange').select('select').property('value')
-	  
-	  var nat = d3.select('div.natchange').select('select').property('value')
-	  
-	  var age = d3.select('div.agechange').select('select').property('value')
-      
-      update_lines( 'Emmigration', 1, age, sex, nat);
-      update_lines( 'Immigration',2,age, sex, nat);
-      update_lines( 'Unemployment',3, age, sex, nat);
-    }
-		
-	// from http://bl.ocks.org/jfreels/6734823 
-	var selectboxSex = d3.select('div.sexchange')
-		.append('select')
-		.attr('class','select')
-		.on('change', plotchange);
-
-	var sex_options = ["Both", "Male", "Female"];
-	//adding the optin
-	var options = selectboxSex.selectAll('option')
-		.data(sex_options).enter()
-		.append('option')
-		.text(function (d) { return d; });
-			
-	//Same as above for Age Groupings
-	var selectboxAge = d3.select('div.agechange')
-		.append('select')
-		.attr('class','select')
-		.on('change', plotchange);
-
-	var age_options = ["15 - 74 years", "15 - 24 years", "25 - 74 years"];
-
-	var options = selectboxAge.selectAll('option')
-		.data(age_options).enter()
-		.append('option')
-		.text(function (d) { return d; });
-
-	//Same as above for Nationality
-	var selectboxNat = d3.select('div.natchange')
-		.append('select')
-		.attr('class','select')
-		.on('change', plotchange);
-
-	var nat_options = ["All", "Irish", "UK", "EU15", "EU28", "Other"];
-
-	var options = selectboxNat.selectAll('option')
-		.data(nat_options).enter()
-		.append('option')
-		.text(function (d) { return d; });
-
-		
-		
-    };
-    //load csv, format data and run plotting function
-    function main() {
-		var formatYear = d3.timeParse("%Y");
-
-		d3.csv("data/combined_data.csv", function(d) {
-			d.Year = formatYear(d.Year);
-			d.Result = +d.Result;
-			return d;
-			}, draw_chart);
-	  
     };
 
     </script>
@@ -351,20 +350,34 @@
 
   </script>
 <h1>Immigration and Emigration in Ireland (2006 - 2016)</h1>
-<h2>Data Visualisation Project - Donal O Farrell</h2>
+<h2>Data Visualization Project - Donal O Farrell</h2>
+<div class = 'summary'>
+  <p class = 'summary'>The island of Ireland has always been associated with large scale emigration of its people to all corners of the world.
+    This historical trend of mass emigration was reversed during the period of dramatic economic growth that started in the late 90's and became known as "The Celtic Tiger".
+    During this period the Republic of Ireland became a recipient of large scale immigration for the first time since the formation of an independent Irish state.
+    The economic boom was followed by an economic bust beginning in 2008 and intensifying in the years after. Once again the Republic of Ireland became a nation of net emigration
+    as unemployment, especially in young people, climbed.
+  <p/>
+  <p class= "summary"> 
+    The purpose of this visualization is to demonstrate the impact on net migration in the Republic of Ireland from just   before this economic crisis to the present. Since there are many measures of economic activity the percentage unemployment in the country will be used as a proxy for the overall economic health.  
+    Along side unemployment figures the yearly immigration and emigration figures for the country from 2006 to 2016 are used to highlight the impact that the recession had  
+    on both and demonstrate the reversal in net migration was influenced by the economy. In addition, the aim is to produce an interactive graphic that allows the impact of 
+    the economic downturn and subsequent recovery to be broken quantified and broken down by gender, nationality and age.
+  <p/>
+  <br/>
+</body>
 <div class = 'sexchange'>
-	<h3>Filter Sex: </h3>
+  <h3>Filter Sex: </h3>
 </div>
 <div class = 'natchange'>
-	<h3>Filter Nationality (Emmigration/Emmigration): </h3>
+  <h3>Filter Nationality (Immigration/Emigration): </h3>
 </div>
 <div class = 'agechange'>
-	<h3>Filter Age Grouping (Unemployment): </h3>
+  <h3>Filter Age Grouping (Unemployment): </h3>
 </div>
 <div class = 'info'>
-	<p>EU15 refers to European Union member states other than Ireland and the UK up to and including the 1995 enlargement of the EU.</p>
-	<p>EU28 refers to all EU member states added since 1995 and includes Bulgaria and Romania (2007) and Croatia (2013)</p>
-    <p>Other refers to all other countries outside of the current EU, UK and Republic of Ireland</p>
+  <p class = 'info'>EU15 refers to European Union member states other than Ireland and the UK up to and including the 1995 enlargement of the EU.</p>
+  <p class = 'info'>EU28 refers to all EU member states added since 1995 and so includes Bulgaria and Romania (2007) and Croatia (2013)</p>
+  <p>Other refers to all other countries outside of the current EU, UK and Republic of Ireland</p>
 </div>
-</body>
 </html>

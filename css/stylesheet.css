@@ -16,18 +16,15 @@
 		font: 18px arial;
 		width: 1000px;
 	}
-
-	p {
+	p.info {
 		text-align: left;
 		color: black;
 		font: 12px arial;
 		width: 1000px;
 	}
-
-	svg {
-
+	p.summary {
+		font: 16px arial;
 	}
-
 	.axis {
 		font-family: arial;
 		font-size: 0.6em;

@@ -23,7 +23,9 @@
 		width: 1000px;
 	}
 	p.summary {
+		text-align: left;
 		font: 16px arial;
+		width: 1000px;
 	}
 	.axis {
 		font-family: arial;
